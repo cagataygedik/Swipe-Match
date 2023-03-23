@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A21EE9F829CCF6080020A3AF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21EE9F729CCF6080020A3AF /* Constants.swift */; };
 		A2582A8429CCD29A00DFA823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2582A8329CCD29A00DFA823 /* AppDelegate.swift */; };
 		A2582A8629CCD29A00DFA823 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2582A8529CCD29A00DFA823 /* SceneDelegate.swift */; };
 		A2582A8829CCD29A00DFA823 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2582A8729CCD29A00DFA823 /* ViewController.swift */; };
 		A2582A8D29CCD29B00DFA823 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2582A8C29CCD29B00DFA823 /* Assets.xcassets */; };
 		A2582A9029CCD29B00DFA823 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2582A8E29CCD29B00DFA823 /* LaunchScreen.storyboard */; };
 		A28CBF7729CCD7A500E5E505 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CBF7629CCD7A500E5E505 /* Extensions+UIView.swift */; };
+		A28CBF7A29CCE0AD00E5E505 /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CBF7929CCE0AD00E5E505 /* HomeBottomControlsStackView.swift */; };
+		A28CBF7C29CCEB6E00E5E505 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CBF7B29CCEB6E00E5E505 /* TopNavigationStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A21EE9F729CCF6080020A3AF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A2582A8029CCD29A00DFA823 /* Swipe&Match.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swipe&Match.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2582A8329CCD29A00DFA823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2582A8529CCD29A00DFA823 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +28,8 @@
 		A2582A8F29CCD29B00DFA823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2582A9129CCD29B00DFA823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A28CBF7629CCD7A500E5E505 /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
+		A28CBF7929CCE0AD00E5E505 /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
+		A28CBF7B29CCEB6E00E5E505 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +43,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A21EE9F529CCF5E80020A3AF /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				A2582A8C29CCD29B00DFA823 /* Assets.xcassets */,
+				A2582A8329CCD29A00DFA823 /* AppDelegate.swift */,
+				A2582A8529CCD29A00DFA823 /* SceneDelegate.swift */,
+				A2582A8E29CCD29B00DFA823 /* LaunchScreen.storyboard */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		A21EE9F629CCF5FB0020A3AF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A21EE9F729CCF6080020A3AF /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		A2582A7729CCD29A00DFA823 = {
 			isa = PBXGroup;
 			children = (
@@ -56,12 +81,11 @@
 		A2582A8229CCD29A00DFA823 /* Swipe&Match */ = {
 			isa = PBXGroup;
 			children = (
+				A21EE9F629CCF5FB0020A3AF /* Utilities */,
+				A21EE9F529CCF5E80020A3AF /* Support */,
+				A28CBF7829CCE07600E5E505 /* Views */,
 				A28CBF7529CCD70F00E5E505 /* Extensions */,
-				A2582A8329CCD29A00DFA823 /* AppDelegate.swift */,
-				A2582A8529CCD29A00DFA823 /* SceneDelegate.swift */,
 				A2582A8729CCD29A00DFA823 /* ViewController.swift */,
-				A2582A8C29CCD29B00DFA823 /* Assets.xcassets */,
-				A2582A8E29CCD29B00DFA823 /* LaunchScreen.storyboard */,
 				A2582A9129CCD29B00DFA823 /* Info.plist */,
 			);
 			path = "Swipe&Match";
@@ -73,6 +97,15 @@
 				A28CBF7629CCD7A500E5E505 /* Extensions+UIView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A28CBF7829CCE07600E5E505 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A28CBF7929CCE0AD00E5E505 /* HomeBottomControlsStackView.swift */,
+				A28CBF7B29CCEB6E00E5E505 /* TopNavigationStackView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,6 +180,9 @@
 			files = (
 				A2582A8829CCD29A00DFA823 /* ViewController.swift in Sources */,
 				A2582A8429CCD29A00DFA823 /* AppDelegate.swift in Sources */,
+				A28CBF7A29CCE0AD00E5E505 /* HomeBottomControlsStackView.swift in Sources */,
+				A28CBF7C29CCEB6E00E5E505 /* TopNavigationStackView.swift in Sources */,
+				A21EE9F829CCF6080020A3AF /* Constants.swift in Sources */,
 				A28CBF7729CCD7A500E5E505 /* Extensions+UIView.swift in Sources */,
 				A2582A8629CCD29A00DFA823 /* SceneDelegate.swift in Sources */,
 			);

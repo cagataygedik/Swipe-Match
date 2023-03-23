@@ -8,37 +8,22 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    let topStackView = TopNavigationStackView()
+    let middleView = UIView()
+    let bottomStackView = HomeBottomControlsStackView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let grayView = UIView()
-        grayView.backgroundColor = .gray
-        
-        let darkGreyView = UIView()
-        darkGreyView.backgroundColor = .darkGray
-        
-        let blackView = UIView()
-        blackView.backgroundColor = .black
-        
-        let topStackView = UIStackView(arrangedSubviews: [grayView, darkGreyView, blackView])
-        topStackView.axis = .horizontal
-        topStackView.distribution = .fillEqually
-        topStackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        
-        let blueView = UIView()
-        blueView.backgroundColor = .blue
-        
-        let yellowView = UIView()
-        yellowView.backgroundColor = .yellow
-        yellowView.heightAnchor.constraint(equalToConstant: 120).isActive = true
-        
-        let stackView = UIStackView(arrangedSubviews: [topStackView, blueView, yellowView])
-        stackView.axis = .vertical
-        
-        view.addSubview(stackView)
-        
-        stackView.fillSuperview()
+        configureView()
+        middleView.backgroundColor = .blue
+    }
+    
+    fileprivate func configureView() {
+        let allStackView = UIStackView(arrangedSubviews: [topStackView, middleView, bottomStackView])
+        view.addSubview(allStackView)
+        allStackView.axis = .vertical
+        allStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
     }
 }
 
