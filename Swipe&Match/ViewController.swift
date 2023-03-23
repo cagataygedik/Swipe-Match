@@ -12,7 +12,33 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .blue
+        let grayView = UIView()
+        grayView.backgroundColor = .gray
+        
+        let darkGreyView = UIView()
+        darkGreyView.backgroundColor = .darkGray
+        
+        let blackView = UIView()
+        blackView.backgroundColor = .black
+        
+        let topStackView = UIStackView(arrangedSubviews: [grayView, darkGreyView, blackView])
+        topStackView.axis = .horizontal
+        topStackView.distribution = .fillEqually
+        topStackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        let blueView = UIView()
+        blueView.backgroundColor = .blue
+        
+        let yellowView = UIView()
+        yellowView.backgroundColor = .yellow
+        yellowView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        
+        let stackView = UIStackView(arrangedSubviews: [topStackView, blueView, yellowView])
+        stackView.axis = .vertical
+        
+        view.addSubview(stackView)
+        
+        stackView.fillSuperview()
     }
 }
 
