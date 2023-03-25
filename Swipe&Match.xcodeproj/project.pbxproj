@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A21EE9F829CCF6080020A3AF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21EE9F729CCF6080020A3AF /* Constants.swift */; };
+		A21F83C029CEF26F003E0117 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21F83BF29CEF26F003E0117 /* CardView.swift */; };
 		A2582A8429CCD29A00DFA823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2582A8329CCD29A00DFA823 /* AppDelegate.swift */; };
 		A2582A8629CCD29A00DFA823 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2582A8529CCD29A00DFA823 /* SceneDelegate.swift */; };
 		A2582A8829CCD29A00DFA823 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2582A8729CCD29A00DFA823 /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		A21EE9F729CCF6080020A3AF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A21F83BF29CEF26F003E0117 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		A2582A8029CCD29A00DFA823 /* Swipe&Match.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swipe&Match.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2582A8329CCD29A00DFA823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2582A8529CCD29A00DFA823 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			children = (
 				A28CBF7929CCE0AD00E5E505 /* HomeBottomControlsStackView.swift */,
 				A28CBF7B29CCEB6E00E5E505 /* TopNavigationStackView.swift */,
+				A21F83BF29CEF26F003E0117 /* CardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				A28CBF7C29CCEB6E00E5E505 /* TopNavigationStackView.swift in Sources */,
 				A21EE9F829CCF6080020A3AF /* Constants.swift in Sources */,
 				A28CBF7729CCD7A500E5E505 /* Extensions+UIView.swift in Sources */,
+				A21F83C029CEF26F003E0117 /* CardView.swift in Sources */,
 				A2582A8629CCD29A00DFA823 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
