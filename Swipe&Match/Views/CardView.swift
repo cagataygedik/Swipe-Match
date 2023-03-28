@@ -9,6 +9,14 @@ import UIKit
 
 class CardView: UIView {
     
+    var cardViewModel: CardViewModel! {
+        didSet {
+            imageView.image = UIImage(named: cardViewModel.imageName)
+            informationLabel.attributedText = cardViewModel.attributedString
+            informationLabel.textAlignment = cardViewModel.textAlignment
+        }
+    }
+    
     let imageView = UIImageView(image: UIImage(imageLiteralResourceName: "lady5c"))
     let informationLabel = UILabel()
     

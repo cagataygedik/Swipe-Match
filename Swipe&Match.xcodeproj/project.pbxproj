@@ -19,6 +19,7 @@
 		A28CBF7A29CCE0AD00E5E505 /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CBF7929CCE0AD00E5E505 /* HomeBottomControlsStackView.swift */; };
 		A28CBF7C29CCEB6E00E5E505 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CBF7B29CCEB6E00E5E505 /* TopNavigationStackView.swift */; };
 		A28E56A629D2D5AC00475BA3 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28E56A529D2D5AC00475BA3 /* CardViewModel.swift */; };
+		A2ED1A8B29D31736008B244E /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED1A8A29D31736008B244E /* Advertiser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		A28CBF7929CCE0AD00E5E505 /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
 		A28CBF7B29CCEB6E00E5E505 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 		A28E56A529D2D5AC00475BA3 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		A2ED1A8A29D31736008B244E /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				A20B975329D1EBA400D6F27B /* User.swift */,
+				A2ED1A8A29D31736008B244E /* Advertiser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				A21EE9F829CCF6080020A3AF /* Constants.swift in Sources */,
 				A20B975429D1EBA400D6F27B /* User.swift in Sources */,
 				A28CBF7729CCD7A500E5E505 /* Extensions+UIView.swift in Sources */,
+				A2ED1A8B29D31736008B244E /* Advertiser.swift in Sources */,
 				A21F83C029CEF26F003E0117 /* CardView.swift in Sources */,
 				A2582A8629CCD29A00DFA823 /* SceneDelegate.swift in Sources */,
 			);
