@@ -19,16 +19,28 @@ class CardView: UIView {
     
     let imageView = UIImageView(image: UIImage(imageLiteralResourceName: "lady5c"))
     let informationLabel = UILabel()
+    let gradientLayer = CAGradientLayer()
     
     fileprivate let threshold: CGFloat = 80
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureImageView()
+        setupGradientLayer()
         configureInformationLabel()
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
         addGestureRecognizer(panGesture)
+    }
+    
+    private func setupGradientLayer() {
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.5, 1.1]
+        layer.addSublayer(gradientLayer)
+    }
+    
+    override func layoutSubviews() {
+        gradientLayer.frame = self.frame
     }
     
     private func configureImageView() {
@@ -43,7 +55,6 @@ class CardView: UIView {
         addSubview(informationLabel)
         informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
         informationLabel.textColor = .white
-        informationLabel.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
         informationLabel.numberOfLines = 0
     }
     
