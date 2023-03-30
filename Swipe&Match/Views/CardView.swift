@@ -22,6 +22,7 @@ class CardView: UIView {
                 barsStackView.addArrangedSubview(barView)
             }
             barsStackView.arrangedSubviews.first?.backgroundColor = .white
+            setupImageIndexObserver()
         }
     }
     
@@ -39,6 +40,18 @@ class CardView: UIView {
         setupGradientLayer()
         configureInformationLabel()
         handleGestures()
+    }
+    
+    private func setupImageIndexObserver() {
+        cardViewModel.imageIndexObserver = { [weak self] (index, image) in
+            self?.imageView.image = image
+            self?.barsStackView.arrangedSubviews.forEach { (view) in
+                //deselected color
+                view.backgroundColor = .darkGray
+            }
+            //selected color
+            self?.barsStackView.arrangedSubviews[index].backgroundColor = .white
+        }
     }
     
     private func handleGestures() {
@@ -81,24 +94,14 @@ class CardView: UIView {
         informationLabel.numberOfLines = 0
     }
     
-    var imageIndex = 0
-    
     @objc fileprivate func handleTapGesture(gesture: UITapGestureRecognizer) {
         let tapLocation = gesture.location(in: nil)
         let shouldAdvanceNextPhoto = tapLocation.x > frame.width / 2 ? true : false
         if shouldAdvanceNextPhoto {
-            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count - 1)
+            cardViewModel.advanceToNextPhoto()
         } else {
-            imageIndex = max(0, imageIndex - 1)
+            cardViewModel.goToPreviousPhoto()
         }
-        let imageName = cardViewModel.imageNames[imageIndex]
-        imageView.image = UIImage(named: imageName)
-        //deselected color
-        barsStackView.arrangedSubviews.forEach { (view) in
-            view.backgroundColor = .darkGray
-        }
-        //selected color
-        barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
     }
     
     @objc fileprivate func handlePanGesture(gesture: UIPanGestureRecognizer) {
