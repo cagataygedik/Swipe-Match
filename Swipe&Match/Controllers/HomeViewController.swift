@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeController: UIViewController {
+class HomeViewController: UIViewController {
     
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
@@ -27,6 +27,13 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         configureView()
         setupDummyCards()
+        
+        topStackView.profileButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+    }
+    
+    @objc private func handleSettings() {
+        let registrationViewController = RegistrationViewController()
+        present(registrationViewController, animated: true)
     }
     
     fileprivate func configureView() {
