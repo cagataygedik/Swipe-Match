@@ -46,11 +46,47 @@ class RegistrationViewController: UIViewController {
         button.layer.cornerRadius = 5
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGradientLayer()
         configureView()
+        setupNotificationObservers()
+        handleTapGesture()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func setupNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        let keyboardHeight = keyboardFrame.height - 180
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = -keyboardHeight
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    private func handleTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     private func configureView() {
