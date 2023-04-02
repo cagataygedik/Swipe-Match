@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
     
     @objc private func handleSettings() {
         let registrationViewController = RegistrationViewController()
+        registrationViewController.modalPresentationStyle = .fullScreen
         present(registrationViewController, animated: true)
     }
     
