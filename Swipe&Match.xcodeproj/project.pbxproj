@@ -16,6 +16,8 @@
 		A2582A8829CCD29A00DFA823 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2582A8729CCD29A00DFA823 /* HomeViewController.swift */; };
 		A2582A8D29CCD29B00DFA823 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2582A8C29CCD29B00DFA823 /* Assets.xcassets */; };
 		A2582A9029CCD29B00DFA823 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2582A8E29CCD29B00DFA823 /* LaunchScreen.storyboard */; };
+		A28505BF29DAEDAF007E4E6A /* RegisterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28505BE29DAEDAF007E4E6A /* RegisterButton.swift */; };
+		A28505C129DAEFBC007E4E6A /* SelectPhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28505C029DAEFBC007E4E6A /* SelectPhotoButton.swift */; };
 		A28CBF7729CCD7A500E5E505 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CBF7629CCD7A500E5E505 /* Extensions+UIView.swift */; };
 		A28CBF7A29CCE0AD00E5E505 /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CBF7929CCE0AD00E5E505 /* HomeBottomControlsStackView.swift */; };
 		A28CBF7C29CCEB6E00E5E505 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CBF7B29CCEB6E00E5E505 /* TopNavigationStackView.swift */; };
@@ -39,6 +41,8 @@
 		A2582A8C29CCD29B00DFA823 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2582A8F29CCD29B00DFA823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2582A9129CCD29B00DFA823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A28505BE29DAEDAF007E4E6A /* RegisterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterButton.swift; sourceTree = "<group>"; };
+		A28505C029DAEFBC007E4E6A /* SelectPhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoButton.swift; sourceTree = "<group>"; };
 		A28CBF7629CCD7A500E5E505 /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 		A28CBF7929CCE0AD00E5E505 /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
 		A28CBF7B29CCEB6E00E5E505 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
@@ -132,6 +136,23 @@
 			path = "Swipe&Match";
 			sourceTree = "<group>";
 		};
+		A28505BC29DAED8C007E4E6A /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				A2CC8FE529D7246B00A62E03 /* CustomTextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		A28505BD29DAED95007E4E6A /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				A28505BE29DAEDAF007E4E6A /* RegisterButton.swift */,
+				A28505C029DAEFBC007E4E6A /* SelectPhotoButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		A28CBF7529CCD70F00E5E505 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,7 +192,8 @@
 		A2CC8FE729D7260A00A62E03 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				A2CC8FE529D7246B00A62E03 /* CustomTextField.swift */,
+				A28505BD29DAED95007E4E6A /* Buttons */,
+				A28505BC29DAED8C007E4E6A /* TextFields */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -309,7 +331,9 @@
 				A21EE9F829CCF6080020A3AF /* Constants.swift in Sources */,
 				A2CC8FE429D71D0800A62E03 /* RegistrationViewController.swift in Sources */,
 				A20B975429D1EBA400D6F27B /* User.swift in Sources */,
+				A28505C129DAEFBC007E4E6A /* SelectPhotoButton.swift in Sources */,
 				A28CBF7729CCD7A500E5E505 /* Extensions+UIView.swift in Sources */,
+				A28505BF29DAEDAF007E4E6A /* RegisterButton.swift in Sources */,
 				A2ED1A8B29D31736008B244E /* Advertiser.swift in Sources */,
 				A21F83C029CEF26F003E0117 /* CardView.swift in Sources */,
 				A2582A8629CCD29A00DFA823 /* SceneDelegate.swift in Sources */,

@@ -11,29 +11,35 @@ import JGProgressHUD
 
 class RegistrationViewController: UIViewController {
     
-    let selectPhotoButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(Title.photo, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 32, weight: .heavy)
-        button.backgroundColor = .white
-        button.setTitleColor(.black, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 275).isActive = true
-        button.layer.cornerRadius = 16
+    let selectPhotoButton = SelectPhotoButton(frame: .zero)
+    let fullNameTextField = CustomTextField(placeholder: Placeholder.fullName, keyboardType: .emailAddress)
+    let emailTextField = CustomTextField(placeholder: Placeholder.email, keyboardType: .emailAddress)
+    let passwordTextField = CustomTextField(placeholder: Placeholder.password, keyboardType: .default)
+    let registerButton = RegisterButton(type: .system)
+    
+    /*
+    let selectPhotoButton: SelectPhotoButton = {
+        let button = SelectPhotoButton(type: .system)
         return button
     }()
+     
+    
     
     lazy var fullNameTextField: CustomTextField = {
         let textField = CustomTextField(placeholder: Placeholder.fullName, keyboardType: .default)
         textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textField
     }()
+     
+    
     
     lazy var emailTextField: CustomTextField = {
         let textField = CustomTextField(placeholder: Placeholder.email, keyboardType: .emailAddress)
         textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textField
     }()
+     
+    
     
     lazy var passwordTextField: CustomTextField = {
         let textField = CustomTextField(placeholder: Placeholder.password, keyboardType: .default)
@@ -42,21 +48,14 @@ class RegistrationViewController: UIViewController {
         textField.textContentType = .oneTimeCode
         return textField
     }()
+     
     
-    lazy var registerButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(Title.register, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-        button.isEnabled = false
-        button.backgroundColor = .lightGray
-        button.setTitleColor(.white, for: .disabled)
-        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        button.layer.cornerRadius = 5
+    lazy var registerButton: RegisterButton = {
+        let button = RegisterButton(type: .system)
         button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
         return button
     }()
+    */
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,11 +63,33 @@ class RegistrationViewController: UIViewController {
         configureView()
         setupNotificationObservers()
         handleTapGesture()
+        configureFullNameTextField()
+        configureEmailTextField()
+        configurePasswordTextField()
+        configureRegisterButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func configureFullNameTextField() {
+       fullNameTextField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
+    }
+    
+    private func configureEmailTextField() {
+       emailTextField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
+    }
+    
+    private func configurePasswordTextField() {
+        passwordTextField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.textContentType = .oneTimeCode
+    }
+    
+    private func configureRegisterButton() {
+        registerButton.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
     }
     
     @objc private func handleRegister() {
