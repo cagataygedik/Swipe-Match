@@ -11,6 +11,7 @@ class RegistrationViewController: UIViewController {
     
     let selectPhotoButton: UIButton = {
         let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(Title.photo, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 32, weight: .heavy)
         button.backgroundColor = .white
@@ -20,28 +21,35 @@ class RegistrationViewController: UIViewController {
         return button
     }()
     
-    let fullNameTextField: CustomTextField = {
+    lazy var fullNameTextField: CustomTextField = {
         let textField = CustomTextField(placeholder: Placeholder.fullName, keyboardType: .default)
+        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textField
     }()
     
-    let emailTextField: CustomTextField = {
+    lazy var emailTextField: CustomTextField = {
         let textField = CustomTextField(placeholder: Placeholder.email, keyboardType: .emailAddress)
+        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textField
     }()
     
-    let passwordTextField: CustomTextField = {
+    lazy var passwordTextField: CustomTextField = {
         let textField = CustomTextField(placeholder: Placeholder.password, keyboardType: .default)
+        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         textField.isSecureTextEntry = true
+        textField.textContentType = .oneTimeCode
         return textField
     }()
     
     let registerButton: UIButton = {
         let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(Title.register, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-        button.backgroundColor = Color.button
+        button.isEnabled = false
+        button.backgroundColor = .lightGray
+        button.setTitleColor(.white, for: .disabled)
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         button.layer.cornerRadius = 5
         return button
@@ -54,12 +62,22 @@ class RegistrationViewController: UIViewController {
         setupNotificationObservers()
         handleTapGesture()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
     
+    @objc private func handleTextChange() {
+        guard let fullName = fullNameTextField.text, !fullName.isEmpty, let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text, !password.isEmpty else {
+        registerButton.isEnabled = false
+        registerButton.backgroundColor = .lightGray
+        return
+        }
+        registerButton.isEnabled = true
+        registerButton.backgroundColor = Color.button
+    }
+
     private func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
