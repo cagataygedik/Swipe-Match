@@ -28,6 +28,7 @@ class CustomTextField: UITextField {
         backgroundColor = .white
         heightAnchor.constraint(equalToConstant: 40).isActive = true
         layer.cornerRadius = 5
+        autocorrectionType = .no
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
