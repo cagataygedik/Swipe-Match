@@ -1,0 +1,6 @@
+framework module Pods_Swipe_Match {
+  umbrella header "Pods-Swipe&Match-umbrella.h"
+
+  export *
+  module * { export * }
+}
