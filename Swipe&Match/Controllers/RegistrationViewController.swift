@@ -16,6 +16,7 @@ class RegistrationViewController: UIViewController {
     let emailTextField = CustomTextField(placeholder: Placeholder.email, keyboardType: .emailAddress)
     let passwordTextField = CustomTextField(placeholder: Placeholder.password, keyboardType: .default)
     let registerButton = RegisterButton(type: .system)
+    let registeringHUD = JGProgressHUD(style: .dark)
     
     /*
     let selectPhotoButton: SelectPhotoButton = {
@@ -108,6 +109,9 @@ class RegistrationViewController: UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
+        registeringHUD.textLabel.text = "Registering"
+        registeringHUD.show(in: view)
+        
         Auth.auth().createUser(withEmail: email, password: password) {
             (res, err) in
             if let err = err {
@@ -116,10 +120,32 @@ class RegistrationViewController: UIViewController {
                 return
             }
             print("Registered user:", res?.user.uid ?? "")
+            
+            let image = self.selectPhotoButton.imageView?.image
+            let imageData = image?.jpegData(compressionQuality: 0.8) ?? Data()
+            let imageName = UUID().uuidString
+            let storageRef = Storage.storage().reference(withPath: "/images\(imageName)")
+            storageRef.putData(imageData, metadata: nil) { (metadata, error) in
+                if let error = error {
+                    print("failed to upload image:", error)
+                    self.showHUDWithError(error: error)
+                    return
+                }
+                print("Successfully upload image")
+                storageRef.downloadURL { (url, err) in
+                    if let err = err {
+                        self.showHUDWithError(error: err)
+                        return
+                    }
+                    self.registeringHUD.dismiss()
+                    print("Download the url of the image is:", url?.absoluteString ?? "")
+                }
+            }
         }
     }
     
     private func showHUDWithError(error: Error) {
+        registeringHUD.dismiss()
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Failed registration"
         hud.detailTextLabel.text = error.localizedDescription
