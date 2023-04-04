@@ -63,6 +63,7 @@ class RegistrationViewController: UIViewController {
         configureView()
         setupNotificationObservers()
         handleTapGesture()
+        configureSelectPhotoButton()
         configureFullNameTextField()
         configureEmailTextField()
         configurePasswordTextField()
@@ -72,6 +73,10 @@ class RegistrationViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func configureSelectPhotoButton() {
+        selectPhotoButton.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
     }
     
     private func configureFullNameTextField() {
@@ -90,6 +95,12 @@ class RegistrationViewController: UIViewController {
     
     private func configureRegisterButton() {
         registerButton.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+    }
+    
+    @objc private func handleSelectPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true)
     }
     
     @objc private func handleRegister() {
@@ -172,5 +183,18 @@ class RegistrationViewController: UIViewController {
         gradientLayer.locations = [0, 1]
         view.layer.addSublayer(gradientLayer)
         gradientLayer.frame = view.bounds
+    }
+}
+
+extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
     }
 }

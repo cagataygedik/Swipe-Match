@@ -26,5 +26,7 @@ class SelectPhotoButton: UIButton {
         titleLabel?.font = UIFont.systemFont(ofSize: 32, weight: .heavy)
         heightAnchor.constraint(equalToConstant: 275).isActive = true
         layer.cornerRadius = 16
+        imageView?.contentMode = .scaleAspectFill
+        clipsToBounds = true
     }
 }
