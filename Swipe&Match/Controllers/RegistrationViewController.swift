@@ -107,7 +107,22 @@ class RegistrationViewController: UIViewController {
                 }
                 self.registeringHUD.dismiss()
                 print("Download the url of the image is:", url?.absoluteString ?? "")
+                let imageUrL = url?.absoluteString ?? ""
+                self.saveInfoToFirebase(imageUrl: imageUrL)
             }
+        }
+    }
+    
+    private func saveInfoToFirebase(imageUrl: String) {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        let fullName = fullNameTextField.text
+        let docData = ["fullname": fullName ?? "", "uid": uid, "imageUrl1": imageUrl]
+        Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+            if let err = err {
+                self.showHUDWithError(error: err)
+                return
+            }
+            print("Successfully saved user info to Firebase")
         }
     }
     
