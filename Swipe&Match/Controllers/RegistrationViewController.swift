@@ -18,46 +18,6 @@ class RegistrationViewController: UIViewController {
     let registerButton = RegisterButton(type: .system)
     let registeringHUD = JGProgressHUD(style: .dark)
     
-    /*
-    let selectPhotoButton: SelectPhotoButton = {
-        let button = SelectPhotoButton(type: .system)
-        return button
-    }()
-     
-    
-    
-    lazy var fullNameTextField: CustomTextField = {
-        let textField = CustomTextField(placeholder: Placeholder.fullName, keyboardType: .default)
-        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
-        return textField
-    }()
-     
-    
-    
-    lazy var emailTextField: CustomTextField = {
-        let textField = CustomTextField(placeholder: Placeholder.email, keyboardType: .emailAddress)
-        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
-        return textField
-    }()
-     
-    
-    
-    lazy var passwordTextField: CustomTextField = {
-        let textField = CustomTextField(placeholder: Placeholder.password, keyboardType: .default)
-        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
-        textField.isSecureTextEntry = true
-        textField.textContentType = .oneTimeCode
-        return textField
-    }()
-     
-    
-    lazy var registerButton: RegisterButton = {
-        let button = RegisterButton(type: .system)
-        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
-        return button
-    }()
-    */
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGradientLayer()
@@ -81,11 +41,11 @@ class RegistrationViewController: UIViewController {
     }
     
     private func configureFullNameTextField() {
-       fullNameTextField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
+        fullNameTextField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
     }
     
     private func configureEmailTextField() {
-       emailTextField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
+        emailTextField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
     }
     
     private func configurePasswordTextField() {
@@ -106,6 +66,11 @@ class RegistrationViewController: UIViewController {
     
     @objc private func handleRegister() {
         self.dismissKeyboard()
+        self.registerUserToFirebase()
+        self.saveImageToFirebase()
+    }
+    
+    private func registerUserToFirebase() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
@@ -120,26 +85,28 @@ class RegistrationViewController: UIViewController {
                 return
             }
             print("Registered user:", res?.user.uid ?? "")
-            
-            let image = self.selectPhotoButton.imageView?.image
-            let imageData = image?.jpegData(compressionQuality: 0.8) ?? Data()
-            let imageName = UUID().uuidString
-            let storageRef = Storage.storage().reference(withPath: "/images\(imageName)")
-            storageRef.putData(imageData, metadata: nil) { (metadata, error) in
-                if let error = error {
-                    print("failed to upload image:", error)
-                    self.showHUDWithError(error: error)
+        }
+    }
+    
+    private func saveImageToFirebase() {
+        let image = self.selectPhotoButton.imageView?.image
+        let imageData = image?.jpegData(compressionQuality: 0.8) ?? Data()
+        let imageName = UUID().uuidString
+        let storageRef = Storage.storage().reference(withPath: "/images\(imageName)")
+        storageRef.putData(imageData, metadata: nil) { (metadata, error) in
+            if let error = error {
+                print("failed to upload image:", error)
+                self.showHUDWithError(error: error)
+                return
+            }
+            print("Successfully upload image")
+            storageRef.downloadURL { (url, err) in
+                if let err = err {
+                    self.showHUDWithError(error: err)
                     return
                 }
-                print("Successfully upload image")
-                storageRef.downloadURL { (url, err) in
-                    if let err = err {
-                        self.showHUDWithError(error: err)
-                        return
-                    }
-                    self.registeringHUD.dismiss()
-                    print("Download the url of the image is:", url?.absoluteString ?? "")
-                }
+                self.registeringHUD.dismiss()
+                print("Download the url of the image is:", url?.absoluteString ?? "")
             }
         }
     }
@@ -155,14 +122,14 @@ class RegistrationViewController: UIViewController {
     
     @objc private func handleTextChange() {
         guard let fullName = fullNameTextField.text, !fullName.isEmpty, let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text, !password.isEmpty else {
-        registerButton.isEnabled = false
-        registerButton.backgroundColor = .lightGray
-        return
+            registerButton.isEnabled = false
+            registerButton.backgroundColor = .lightGray
+            return
         }
         registerButton.isEnabled = true
         registerButton.backgroundColor = Color.button
     }
-
+    
     private func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
