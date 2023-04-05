@@ -27,7 +27,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         configureView()
         setupDummyCards()
-        
+        configureTopStackView()
+    }
+    
+    private func configureTopStackView() {
         topStackView.profileButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
     }
     
@@ -38,6 +41,7 @@ class HomeViewController: UIViewController {
     }
     
     fileprivate func configureView() {
+        view.backgroundColor = .white
         let allStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, bottomStackView])
         view.addSubview(allStackView)
         allStackView.axis = .vertical

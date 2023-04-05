@@ -16,7 +16,7 @@ class RegistrationViewController: UIViewController {
     let emailTextField = CustomTextField(placeholder: Placeholder.email, keyboardType: .emailAddress)
     let passwordTextField = CustomTextField(placeholder: Placeholder.password, keyboardType: .default)
     let registerButton = RegisterButton(type: .system)
-    let registeringHUD = JGProgressHUD(style: .dark)
+    let registeringHUD = JGProgressHUD(style: .light)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,7 +128,7 @@ class RegistrationViewController: UIViewController {
     
     private func showHUDWithError(error: Error) {
         registeringHUD.dismiss()
-        let hud = JGProgressHUD(style: .dark)
+        let hud = JGProgressHUD(style: .light)
         hud.textLabel.text = "Failed registration"
         hud.detailTextLabel.text = error.localizedDescription
         hud.show(in: self.view)
