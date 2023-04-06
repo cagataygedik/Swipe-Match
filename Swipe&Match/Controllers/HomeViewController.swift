@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     let bottomStackView = HomeBottomControlsStackView()
     
     var cardViewModels = [CardViewModel]()
+    var lastFetchedUser: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +23,19 @@ class HomeViewController: UIViewController {
         setupFirestoreUserCards()
         configureTopStackView()
         fetchUsersFromFirestore()
+        configureBottomStackView()
+    }
+    
+    private func configureBottomStackView() {
+        bottomStackView.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
+    }
+    
+    @objc private func handleRefresh() {
+        fetchUsersFromFirestore()
     }
     
     private func fetchUsersFromFirestore() {
-        let query = Firestore.firestore().collection("users")
+        let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastFetchedUser?.uid ?? ""]).limit(to: 2)
         query.getDocuments { (snapshot,err) in
             if let err = err {
                 print("Failed", err)
@@ -35,9 +45,17 @@ class HomeViewController: UIViewController {
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
                 self.cardViewModels.append(user.toCardViewModel())
+                self.lastFetchedUser = user
+                self.setupCardFromUser(user: user)
             })
-            self.setupFirestoreUserCards()
         }
+    }
+    
+    private func setupCardFromUser(user: User) {
+        let cardView = CardView(frame: .zero)
+        cardView.cardViewModel = user.toCardViewModel()
+        cardsDeckView.addSubview(cardView)
+        cardView.fillSuperview()
     }
     
     private func configureTopStackView() {
@@ -66,6 +84,7 @@ class HomeViewController: UIViewController {
             let cardView = CardView(frame: .zero)
             cardView.cardViewModel = cardVM
             cardsDeckView.addSubview(cardView)
+            cardsDeckView.sendSubviewToBack(cardView)
             cardView.fillSuperview()
         }
     }
