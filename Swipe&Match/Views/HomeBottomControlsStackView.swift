@@ -9,50 +9,30 @@ import UIKit
 
 class HomeBottomControlsStackView: UIStackView {
     
-    let refreshButton = UIButton(type: .system)
-    let dismissButton = UIButton(type: .system)
-    let superLikeButton = UIButton(type: .system)
-    let likeButton = UIButton(type: .system)
-    let boostButton = UIButton(type: .system)
+    let refreshButton = createButton(image: BottomImages.refresh!)
+    let dismissButton = createButton(image: BottomImages.dismiss!)
+    let superLikeButton = createButton(image: BottomImages.superLike!)
+    let likeButton = createButton(image: BottomImages.like!)
+    let boostButton = createButton(image: BottomImages.boost!)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureView()
-        configureRefreshButton()
-        configureDismissButton()
-        configureSuperLikeButton()
-        configureLikeButton()
-        configureBoostButton()
+    }
+    
+    static func createButton(image: UIImage) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
+        return button
     }
     
     private func configureView() {
         distribution = .fillEqually
         heightAnchor.constraint(equalToConstant: 100).isActive = true
-    }
-    
-    private func configureRefreshButton() {
-        addArrangedSubview(refreshButton)
-        refreshButton.setImage(BottomImages.refresh?.withRenderingMode(.alwaysOriginal), for: .normal)
-    }
-    
-    private func configureDismissButton() {
-        addArrangedSubview(dismissButton)
-        dismissButton.setImage(BottomImages.dismiss?.withRenderingMode(.alwaysOriginal), for: .normal)
-    }
-    
-    private func configureSuperLikeButton() {
-        addArrangedSubview(superLikeButton)
-        superLikeButton.setImage(BottomImages.superLike?.withRenderingMode(.alwaysOriginal), for: .normal)
-    }
-    
-    private func configureLikeButton() {
-        addArrangedSubview(likeButton)
-        likeButton.setImage(BottomImages.like?.withRenderingMode(.alwaysOriginal), for: .normal)
-    }
-    
-    private func configureBoostButton() {
-        addArrangedSubview(boostButton)
-        boostButton.setImage(BottomImages.boost?.withRenderingMode(.alwaysOriginal), for: .normal)
+        [refreshButton, dismissButton, superLikeButton, likeButton, boostButton].forEach { (button) in
+            self.addArrangedSubview(button)
+        }
     }
     
     required init(coder: NSCoder) {
