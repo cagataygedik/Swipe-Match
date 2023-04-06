@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeViewController: UIViewController {
     
@@ -13,21 +14,29 @@ class HomeViewController: UIViewController {
     let cardsDeckView = UIView()
     let bottomStackView = HomeBottomControlsStackView()
     
-    let cardViewModels: [CardViewModel] = {
-        let producers = [
-        User(name: "Kelly", age: 23, profession: "DJ", imageNames: ["kelly1", "kelly2", "kelly3"]),
-        User(name: "Jane", age: 25, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"]),
-        Advertiser(title: "Slide out menu", brandName: "let's build that app", posterPhotoName: "slide_out_menu_poster")
-        ] as [ProducesCardViewModel]
-        let viewModels = producers.map({return $0.toCardViewModel()})
-        return viewModels
-    }()
+    var cardViewModels = [CardViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         setupDummyCards()
         configureTopStackView()
+        fetchUsersFromFirestore()
+    }
+    
+    private func fetchUsersFromFirestore() {
+        Firestore.firestore().collection("users").getDocuments { (snapshot,err) in
+            if let err = err {
+                print("Failed", err)
+                return
+            }
+            snapshot?.documents.forEach({ (documentSnapshot) in
+                let userDictionary = documentSnapshot.data()
+                let user = User(dictionary: userDictionary)
+                self.cardViewModels.append(user.toCardViewModel())
+            })
+            self.setupDummyCards()
+        }
     }
     
     private func configureTopStackView() {
