@@ -16,7 +16,7 @@ class CardViewModel {
     let attributedString: NSMutableAttributedString
     let textAlignment: NSTextAlignment
 
-    var imageIndexObserver: ((Int, UIImage?) -> ())?
+    var imageIndexObserver: ((Int, String?) -> ())?
     
     init(imageNames: [String], attributedString: NSMutableAttributedString, textAlignment: NSTextAlignment) {
         self.imageNames = imageNames
@@ -26,9 +26,9 @@ class CardViewModel {
     
     fileprivate var imageIndex = 0 {
         didSet {
-            let imageName = imageNames[imageIndex]
-            let image = UIImage(named: imageName)
-            imageIndexObserver?(imageIndex ,image)
+            let imageUrl = imageNames[imageIndex]
+//            let image = UIImage(named: imageName)
+            imageIndexObserver?(imageIndex ,imageUrl)
         }
     }
     
