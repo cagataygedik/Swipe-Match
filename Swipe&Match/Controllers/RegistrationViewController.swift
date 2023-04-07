@@ -11,7 +11,7 @@ import JGProgressHUD
 
 class RegistrationViewController: UIViewController {
     
-    let selectPhotoButton = SelectPhotoButton(frame: .zero)
+    let selectPhotoButton = RegisterSelectPhotoButton(frame: .zero)
     let fullNameTextField = CustomTextField(placeholder: Placeholder.fullName, keyboardType: .emailAddress)
     let emailTextField = CustomTextField(placeholder: Placeholder.email, keyboardType: .emailAddress)
     let passwordTextField = CustomTextField(placeholder: Placeholder.password, keyboardType: .default)
