@@ -26,6 +26,11 @@ enum Placeholder {
     static let fullName = "Enter full name"
     static let email = "Enter e-mail"
     static let password = "Enter password"
+    static let name = "Enter your name"
+    static let age = "Enter your age"
+    static let bio = "Enter your bio"
+    static let profession = "Enter your profession"
+    static let selectPhoto = "Select a photo"
 }
 
 enum Color {
@@ -37,4 +42,18 @@ enum Color {
 enum Title {
     static let photo = "Select a photo"
     static let register = "Register"
+}
+
+enum NavigationItemText {
+    static let settings = "Settings"
+    static let cancel = "Cancel"
+    static let save = "Save"
+    static let logout = "Logout"
+}
+
+enum HeaderText {
+    static let name = "Name"
+    static let profession = "Profession"
+    static let age = "Age"
+    static let bio = "Bio"
 }
