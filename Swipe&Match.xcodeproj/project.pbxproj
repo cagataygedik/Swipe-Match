@@ -17,6 +17,7 @@
 		A2582A8D29CCD29B00DFA823 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2582A8C29CCD29B00DFA823 /* Assets.xcassets */; };
 		A2582A9029CCD29B00DFA823 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2582A8E29CCD29B00DFA823 /* LaunchScreen.storyboard */; };
 		A26ACEB929E00FFB0056DF45 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26ACEB829E00FFB0056DF45 /* SettingsTableViewController.swift */; };
+		A26ACEC129E02D220056DF45 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26ACEC029E02D220056DF45 /* SettingsTableViewCell.swift */; };
 		A28505BF29DAEDAF007E4E6A /* RegisterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28505BE29DAEDAF007E4E6A /* RegisterButton.swift */; };
 		A28505C129DAEFBC007E4E6A /* RegisterSelectPhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28505C029DAEFBC007E4E6A /* RegisterSelectPhotoButton.swift */; };
 		A28CBF7729CCD7A500E5E505 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CBF7629CCD7A500E5E505 /* Extensions+UIView.swift */; };
@@ -43,6 +44,7 @@
 		A2582A8F29CCD29B00DFA823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2582A9129CCD29B00DFA823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A26ACEB829E00FFB0056DF45 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		A26ACEC029E02D220056DF45 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		A28505BE29DAEDAF007E4E6A /* RegisterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterButton.swift; sourceTree = "<group>"; };
 		A28505C029DAEFBC007E4E6A /* RegisterSelectPhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSelectPhotoButton.swift; sourceTree = "<group>"; };
 		A28CBF7629CCD7A500E5E505 /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
@@ -138,6 +140,23 @@
 			path = "Swipe&Match";
 			sourceTree = "<group>";
 		};
+		A26ACEBE29E02CFF0056DF45 /* StackViews */ = {
+			isa = PBXGroup;
+			children = (
+				A28CBF7929CCE0AD00E5E505 /* HomeBottomControlsStackView.swift */,
+				A28CBF7B29CCEB6E00E5E505 /* TopNavigationStackView.swift */,
+			);
+			path = StackViews;
+			sourceTree = "<group>";
+		};
+		A26ACEBF29E02D0C0056DF45 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A26ACEC029E02D220056DF45 /* SettingsTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		A28505BC29DAED8C007E4E6A /* TextFields */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,9 +185,9 @@
 		A28CBF7829CCE07600E5E505 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A26ACEBF29E02D0C0056DF45 /* Cells */,
+				A26ACEBE29E02CFF0056DF45 /* StackViews */,
 				A2CC8FE729D7260A00A62E03 /* CustomViews */,
-				A28CBF7929CCE0AD00E5E505 /* HomeBottomControlsStackView.swift */,
-				A28CBF7B29CCEB6E00E5E505 /* TopNavigationStackView.swift */,
 				A21F83BF29CEF26F003E0117 /* CardView.swift */,
 			);
 			path = Views;
@@ -336,6 +355,7 @@
 				A20B975429D1EBA400D6F27B /* User.swift in Sources */,
 				A28505C129DAEFBC007E4E6A /* RegisterSelectPhotoButton.swift in Sources */,
 				A28CBF7729CCD7A500E5E505 /* Extensions+UIView.swift in Sources */,
+				A26ACEC129E02D220056DF45 /* SettingsTableViewCell.swift in Sources */,
 				A28505BF29DAEDAF007E4E6A /* RegisterButton.swift in Sources */,
 				A26ACEB929E00FFB0056DF45 /* SettingsTableViewController.swift in Sources */,
 				A2ED1A8B29D31736008B244E /* Advertiser.swift in Sources */,

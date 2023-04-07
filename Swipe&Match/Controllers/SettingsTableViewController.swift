@@ -17,7 +17,28 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
     lazy var imageTwoButton = createButton(selector: #selector(handleSelectPhoto))
     lazy var imageThreeButton = createButton(selector: #selector(handleSelectPhoto))
     
-    let headerView = UIView()
+    let padding: CGFloat = 16
+    lazy var headerView: UIView = {
+        let header = UIView()
+        header.addSubview(imageOneButton)
+        imageOneButton.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: nil, padding: .init(top: padding, left: padding, bottom: padding, right: 0))
+        imageOneButton.widthAnchor.constraint(equalTo: header.widthAnchor, multiplier: 0.45).isActive = true
+        
+        let stackView = UIStackView(arrangedSubviews: [imageTwoButton, imageThreeButton])
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = padding
+        header.addSubview(stackView)
+        stackView.anchor(top: header.topAnchor, leading: imageOneButton.trailingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: .init(top: padding, left: padding, bottom: padding, right: padding))
+
+        return header
+    }()
+    
+    class HeaderLabel: UILabel {
+        override func drawText(in rect: CGRect) {
+            super.drawText(in: rect.insetBy(dx: 16, dy: 0))
+        }
+    }
     
     @objc private func handleSelectPhoto(button: UIButton) {
         let imagePickerController = CustomImagePickerController()
@@ -33,10 +54,9 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
         dismiss(animated: true)
     }
     
-    
     func createButton(selector: Selector) -> UIButton {
         let button = UIButton(type: .system)
-        button.setTitle("Select Photo", for: .normal)
+        button.setTitle(Placeholder.selectPhoto, for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 8
         button.addTarget(self, action: selector, for: .touchUpInside)
@@ -45,49 +65,75 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
         return button
     }
      
-
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationController()
-        tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        tableView.tableFooterView = UIView()
+        configureTableView()
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        configureImageOneButton()
-        configureStackView()
-        return headerView
+        if section == 0 {
+            return headerView
+        }
+        let headerLabel = HeaderLabel()
+        switch section {
+        case 1:
+            headerLabel.text = HeaderText.name
+        case 2:
+            headerLabel.text = HeaderText.profession
+        case 3:
+            headerLabel.text = HeaderText.age
+        default:
+            headerLabel.text = HeaderText.bio
+        }
+        return headerLabel
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 300
+        if section == 0 {
+            return 300
+        }
+        return 40
     }
     
-    let padding: CGFloat = 16
-    
-    private func configureImageOneButton() {
-        headerView.addSubview(imageOneButton)
-        imageOneButton.anchor(top: headerView.topAnchor, leading: headerView.leadingAnchor, bottom: headerView.bottomAnchor, trailing: nil, padding: .init(top: padding, left: padding, bottom: padding, right: 0))
-        imageOneButton.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.45).isActive = true
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 5
     }
     
-    //configure imageTwoButton, imageThreeButton
-    private func configureStackView() {
-        let stackView = UIStackView(arrangedSubviews: [imageTwoButton, imageThreeButton])
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.spacing = padding
-        headerView.addSubview(stackView)
-        stackView.anchor(top: headerView.topAnchor, leading: imageOneButton.trailingAnchor, bottom: headerView.bottomAnchor, trailing: headerView.trailingAnchor, padding: .init(top: padding, left: padding, bottom: padding, right: padding))
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? 0 : 1
     }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = SettingsTableViewCell(style: .default, reuseIdentifier: nil)
+        
+        switch indexPath.section {
+        case 1:
+            cell.textField.placeholder = Placeholder.name
+        case 2:
+            cell.textField.placeholder = Placeholder.profession
+        case 3:
+            cell.textField.placeholder = Placeholder.age
+        default:
+            cell.textField.placeholder = Placeholder.bio
+        }
+        
+        return cell
+    }
+    
+    private func configureTableView() {
+        tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        tableView.tableFooterView = UIView()
+        tableView.keyboardDismissMode = .interactive
+    }
+  
     private func configureNavigationController() {
-        navigationItem.title = "Settings"
+        navigationItem.title = NavigationItemText.settings
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NavigationItemText.cancel, style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleCancel)),
-            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleCancel))
+            UIBarButtonItem(title: NavigationItemText.save, style: .plain, target: self, action: #selector(handleCancel)),
+            UIBarButtonItem(title: NavigationItemText.logout, style: .plain, target: self, action: #selector(handleCancel))
         ]
     }
     
