@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectPhotoButton: UIButton {
+class RegisterSelectPhotoButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
