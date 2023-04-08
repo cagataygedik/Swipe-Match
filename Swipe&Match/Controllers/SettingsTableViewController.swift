@@ -13,21 +13,24 @@ class CustomImagePickerController: UIImagePickerController {
 
 class SettingsTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    let padding: CGFloat = 16
     lazy var imageOneButton = createButton(selector: #selector(handleSelectPhoto))
     lazy var imageTwoButton = createButton(selector: #selector(handleSelectPhoto))
     lazy var imageThreeButton = createButton(selector: #selector(handleSelectPhoto))
     
-    let padding: CGFloat = 16
     lazy var headerView: UIView = {
         let header = UIView()
+        imageOneButton.translatesAutoresizingMaskIntoConstraints = false
         header.addSubview(imageOneButton)
         imageOneButton.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: nil, padding: .init(top: padding, left: padding, bottom: padding, right: 0))
         imageOneButton.widthAnchor.constraint(equalTo: header.widthAnchor, multiplier: 0.45).isActive = true
+        
         
         let stackView = UIStackView(arrangedSubviews: [imageTwoButton, imageThreeButton])
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.spacing = padding
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         header.addSubview(stackView)
         stackView.anchor(top: header.topAnchor, leading: imageOneButton.trailingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: .init(top: padding, left: padding, bottom: padding, right: padding))
 

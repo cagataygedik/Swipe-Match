@@ -7,9 +7,9 @@
 
 import UIKit
 
-class SettingsTableViewCell: UITableViewCell {
+class SettingsTableViewCell: UITableViewCell, UITextFieldDelegate {
     
-    class SettingTextField: UITextField {
+    class SettingsTextField: UITextField {
         
         override func textRect(forBounds bounds: CGRect) -> CGRect {
             return bounds.insetBy(dx: 24, dy: 0)
@@ -24,20 +24,22 @@ class SettingsTableViewCell: UITableViewCell {
         }
     }
     
-    let textField = SettingTextField()
+    let textField = SettingsTextField()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureTextField()
+        configure()
+    }
+    
+    private func configure() {
+        textField.placeholder = Placeholder.name
+        contentView.becomeFirstResponder()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(textField)
+        textField.fillSuperview()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureTextField() {
-        textField.placeholder = "Enter Name"
-        addSubview(textField)
-        textField.fillSuperview()
     }
 }
