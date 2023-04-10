@@ -21,6 +21,8 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
     lazy var imageTwoButton = createButton(selector: #selector(handleSelectPhoto))
     lazy var imageThreeButton = createButton(selector: #selector(handleSelectPhoto))
     
+    let hud = JGProgressHUD(style: .light)
+    
     lazy var headerView: UIView = {
         let header = UIView()
         imageOneButton.translatesAutoresizingMaskIntoConstraints = false
@@ -140,11 +142,14 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
         case 1:
             cell.textField.placeholder = Placeholder.name
             cell.textField.text = user?.name
+            cell.textField.addTarget(self, action: #selector(handleNameChange), for: .editingChanged)
         case 2:
             cell.textField.placeholder = Placeholder.profession
             cell.textField.text = user?.profession
+            cell.textField.addTarget(self, action: #selector(handleProfessionChange), for: .editingChanged)
         case 3:
             cell.textField.placeholder = Placeholder.age
+            cell.textField.addTarget(self, action: #selector(handleAgeChange), for: .editingChanged)
             if let age = user?.age {
                 cell.textField.text = String(age)
             }
@@ -153,6 +158,18 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
         }
         
         return cell
+    }
+    
+    @objc private func handleNameChange(textField: UITextField) {
+        self.user?.name = textField.text
+    }
+    
+    @objc private func handleProfessionChange(textField: UITextField) {
+        self.user?.profession = textField.text
+    }
+    
+    @objc private func handleAgeChange(textField: UITextField) {
+        self.user?.age = Int(textField.text ?? "")
     }
     
     private func configureTableView() {
@@ -166,9 +183,31 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NavigationItemText.cancel, style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: NavigationItemText.save, style: .plain, target: self, action: #selector(handleCancel)),
+            UIBarButtonItem(title: NavigationItemText.save, style: .plain, target: self, action: #selector(handleSave)),
             UIBarButtonItem(title: NavigationItemText.logout, style: .plain, target: self, action: #selector(handleCancel))
         ]
+    }
+    
+    @objc private func handleSave() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let docData: [String: Any] = [
+            "uid": uid,
+            "fullname": user?.name ?? "",
+            "imageUrl1": user?.imageUrl1 ?? "",
+            "age": user?.age ?? -1,
+            "profession": user?.profession ?? ""
+        ]
+        hud.textLabel.text = "Saving settings"
+        hud.show(in: view)
+        Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+            self.hud.dismiss()
+            if let err = err {
+                print("Failed to save user settings:", err)
+                return
+            }
+            
+            print("Finished saving user info")
+        }
     }
     
     @objc private func handleCancel() {
