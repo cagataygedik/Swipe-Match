@@ -212,19 +212,24 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
     }
     
     @objc private func handleMinAgeChange(slider: UISlider) {
-        let indexPath = IndexPath(row: 0, section: 5)
-        let sliderCell = tableView.cellForRow(at: indexPath) as? SliderTableViewCell
-        sliderCell?.minLabel.text = "Min: \(Int(slider.value))"
-        
-        self.user?.minSeekingAge = Int(slider.value)
+        evaluateMinMax()
     }
     
     @objc private func handleMaxAgeChange(slider: UISlider) {
-        let indexPath = IndexPath(row: 0, section: 5)
-        let sliderCell = tableView.cellForRow(at: indexPath) as? SliderTableViewCell
-        sliderCell?.maxLabel.text = "Max: \(Int(slider.value))"
+        evaluateMinMax()
+    }
+    
+    private func evaluateMinMax() {
+        guard let sliderCell = tableView.cellForRow(at: [5, 0]) as? SliderTableViewCell else { return }
+        let minValue = Int(sliderCell.minSlider.value)
+        var maxValue = Int(sliderCell.maxSlider.value)
+        maxValue = max(minValue, maxValue)
+        sliderCell.maxSlider.value = Float(maxValue)
+        sliderCell.minLabel.text = "Min: \(minValue)"
+        sliderCell.maxLabel.text = "Max: \(maxValue)"
         
-        self.user?.maxSeekingAge = Int(slider.value)
+        user?.minSeekingAge = minValue
+        user?.maxSeekingAge = maxValue
     }
     
     @objc private func handleNameChange(textField: UITextField) {
