@@ -125,7 +125,7 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
     }
     
     private func configureTableView() {
-        tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        tableView.backgroundColor = Color.tableView
         tableView.tableFooterView = UIView()
         tableView.keyboardDismissMode = .interactive
     }
