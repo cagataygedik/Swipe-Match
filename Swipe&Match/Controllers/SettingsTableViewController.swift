@@ -154,9 +154,12 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
             headerLabel.text = HeaderText.profession
         case 3:
             headerLabel.text = HeaderText.age
-        default:
+        case 4:
             headerLabel.text = HeaderText.bio
+        default:
+            headerLabel.text = "Seeking Age Range"
         }
+        headerLabel.font = UIFont.systemFont(ofSize: 16)
         return headerLabel
     }
     
@@ -168,7 +171,7 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -176,6 +179,14 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 5 {
+            let sliderCell = SliderTableViewCell(style: .default, reuseIdentifier: nil)
+            sliderCell.minSlider.addTarget(self, action: #selector(handleMinAgeChange), for: .valueChanged)
+            sliderCell.maxSlider.addTarget(self, action: #selector(handleMaxAgeChange), for: .valueChanged)
+            sliderCell.minLabel.text = "Min: \(user?.minSeekingAge ?? -1)"
+            sliderCell.maxLabel.text = "Max: \(user?.maxSeekingAge ?? -1)"
+            return sliderCell
+        }
         let cell = SettingsTableViewCell(style: .default, reuseIdentifier: nil)
         
         switch indexPath.section {
@@ -198,6 +209,22 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
         }
         
         return cell
+    }
+    
+    @objc private func handleMinAgeChange(slider: UISlider) {
+        let indexPath = IndexPath(row: 0, section: 5)
+        let sliderCell = tableView.cellForRow(at: indexPath) as? SliderTableViewCell
+        sliderCell?.minLabel.text = "Min: \(Int(slider.value))"
+        
+        self.user?.minSeekingAge = Int(slider.value)
+    }
+    
+    @objc private func handleMaxAgeChange(slider: UISlider) {
+        let indexPath = IndexPath(row: 0, section: 5)
+        let sliderCell = tableView.cellForRow(at: indexPath) as? SliderTableViewCell
+        sliderCell?.maxLabel.text = "Max: \(Int(slider.value))"
+        
+        self.user?.maxSeekingAge = Int(slider.value)
     }
     
     @objc private func handleNameChange(textField: UITextField) {
@@ -237,7 +264,9 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
             "imageUrl2": user?.imageUrl2 ?? "",
             "imageUrl3": user?.imageUrl3 ?? "",
             "age": user?.age ?? -1,
-            "profession": user?.profession ?? ""
+            "profession": user?.profession ?? "",
+            "minSeekingAge": user?.minSeekingAge ?? -1,
+            "maxSeekingAge": user?.maxSeekingAge ?? -1
         ]
         hud.textLabel.text = "Saving settings"
         hud.show(in: view)

@@ -16,6 +16,7 @@
 		A2582A8829CCD29A00DFA823 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2582A8729CCD29A00DFA823 /* HomeViewController.swift */; };
 		A2582A8D29CCD29B00DFA823 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2582A8C29CCD29B00DFA823 /* Assets.xcassets */; };
 		A2582A9029CCD29B00DFA823 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2582A8E29CCD29B00DFA823 /* LaunchScreen.storyboard */; };
+		A262C88129E42C1D00AA077E /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A262C88029E42C1D00AA077E /* SliderTableViewCell.swift */; };
 		A26ACEB929E00FFB0056DF45 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26ACEB829E00FFB0056DF45 /* SettingsTableViewController.swift */; };
 		A26ACEC129E02D220056DF45 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26ACEC029E02D220056DF45 /* SettingsTableViewCell.swift */; };
 		A28505BF29DAEDAF007E4E6A /* RegisterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28505BE29DAEDAF007E4E6A /* RegisterButton.swift */; };
@@ -43,6 +44,7 @@
 		A2582A8C29CCD29B00DFA823 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2582A8F29CCD29B00DFA823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2582A9129CCD29B00DFA823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A262C88029E42C1D00AA077E /* SliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
 		A26ACEB829E00FFB0056DF45 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		A26ACEC029E02D220056DF45 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		A28505BE29DAEDAF007E4E6A /* RegisterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterButton.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				A26ACEC029E02D220056DF45 /* SettingsTableViewCell.swift */,
+				A262C88029E42C1D00AA077E /* SliderTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				A2582A8829CCD29A00DFA823 /* HomeViewController.swift in Sources */,
 				A2582A8429CCD29A00DFA823 /* AppDelegate.swift in Sources */,
 				A28CBF7A29CCE0AD00E5E505 /* HomeBottomControlsStackView.swift in Sources */,
+				A262C88129E42C1D00AA077E /* SliderTableViewCell.swift in Sources */,
 				A28CBF7C29CCEB6E00E5E505 /* TopNavigationStackView.swift in Sources */,
 				A28E56A629D2D5AC00475BA3 /* CardViewModel.swift in Sources */,
 				A21EE9F829CCF6080020A3AF /* Constants.swift in Sources */,
