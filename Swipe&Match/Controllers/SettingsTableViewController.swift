@@ -60,6 +60,35 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
         let imageButton = (picker as? CustomImagePickerController)?.imageButton
         imageButton?.setImage(selectedImage?.withRenderingMode(.alwaysOriginal), for: .normal)
         dismiss(animated: true)
+        
+        let fileName = UUID().uuidString
+        let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
+        guard let uploadData = selectedImage?.jpegData(compressionQuality: 0.8) else { return }
+        hud.textLabel.text = "Uploading image"
+        hud.show(in: view)
+        ref.putData(uploadData, metadata: nil) { (nil, err) in
+            if let err = err {
+                self.hud.dismiss()
+                print("failed to upload image to storage", err)
+            }
+            print("Succesfull")
+            ref.downloadURL { [self] (url, err) in
+                self.hud.dismiss()
+                if let err = err {
+                    print("failed to retrieved download URL", err)
+                    return
+                }
+                print("Finsihed download:", url?.absoluteString ?? "")
+                
+                if imageButton == self.imageOneButton {
+                    self.user?.imageUrl1 = url?.absoluteString
+                } else if imageButton == self.imageTwoButton {
+                    self.user?.imageUrl2 = url?.absoluteString
+                } else {
+                    self.user?.imageUrl3 = url?.absoluteString
+                }
+            }
+        }
     }
     
     func createButton(selector: Selector) -> UIButton {
@@ -96,9 +125,20 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
     }
     
     private func loadUserPhotos() {
-        guard let imageUrl = user?.imageUrl1, let url = URL(string: imageUrl) else { return }
-        SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { image, _, _, _, _, _ in
-            self.imageOneButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        if let imageUrl = user?.imageUrl1, let url = URL(string: imageUrl) {
+            SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { image, _, _, _, _, _ in
+                self.imageOneButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
+        }
+        if let imageUrl = user?.imageUrl2, let url = URL(string: imageUrl) {
+            SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { image, _, _, _, _, _ in
+                self.imageTwoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
+        }
+        if let imageUrl = user?.imageUrl3, let url = URL(string: imageUrl) {
+            SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { image, _, _, _, _, _ in
+                self.imageThreeButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
         }
     }
     
@@ -194,6 +234,8 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
             "uid": uid,
             "fullname": user?.name ?? "",
             "imageUrl1": user?.imageUrl1 ?? "",
+            "imageUrl2": user?.imageUrl2 ?? "",
+            "imageUrl3": user?.imageUrl3 ?? "",
             "age": user?.age ?? -1,
             "profession": user?.profession ?? ""
         ]
