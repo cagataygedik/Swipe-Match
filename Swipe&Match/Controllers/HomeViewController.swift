@@ -9,11 +9,11 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class HomeViewController: UIViewController {
-    
+class HomeViewController: UIViewController, SettingsTableViewControllerDelegate {
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let bottomStackView = HomeBottomControlsStackView()
+    let hud = JGProgressHUD(style: .light)
     
     var cardViewModels = [CardViewModel]()
     var lastFetchedUser: User?
@@ -23,8 +23,23 @@ class HomeViewController: UIViewController {
         configureView()
         setupFirestoreUserCards()
         configureTopStackView()
-        fetchUsersFromFirestore()
-        configureBottomStackView()
+        fetchCurrentUser()
+        //fetchUsersFromFirestore()
+        //configureBottomStackView()
+    }
+    
+    fileprivate var user: User?
+    
+    private func fetchCurrentUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
+            if let err = err {
+                print(err)
+            }
+            guard let dictionary = snapshot?.data() else { return }
+            self.user = User(dictionary: dictionary)
+            self.fetchUsersFromFirestore()
+        }
     }
     
     private func configureBottomStackView() {
@@ -36,11 +51,12 @@ class HomeViewController: UIViewController {
     }
     
     private func fetchUsersFromFirestore() {
+        guard let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge else { return }
         let hud = JGProgressHUD(style: .light)
         hud.textLabel.text = "Fetching users"
         hud.show(in: view)
         
-        let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastFetchedUser?.uid ?? ""]).limit(to: 2)
+        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
         query.getDocuments { (snapshot,err) in
             hud.dismiss()
             if let err = err {
@@ -70,9 +86,14 @@ class HomeViewController: UIViewController {
     
     @objc private func handleSettings() {
         let settingsTableViewController = SettingsTableViewController()
+        settingsTableViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: settingsTableViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
+    }
+    
+    func didSaveSettings() {
+        fetchCurrentUser()
     }
     
     fileprivate func configureView() {

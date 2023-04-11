@@ -10,11 +10,17 @@ import Firebase
 import JGProgressHUD
 import SDWebImage
 
+protocol SettingsTableViewControllerDelegate {
+    func didSaveSettings()
+}
+
 class CustomImagePickerController: UIImagePickerController {
     var imageButton: UIButton?
 }
 
 class SettingsTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    var delegate: SettingsTableViewControllerDelegate?
     
     let padding: CGFloat = 16
     lazy var imageOneButton = createButton(selector: #selector(handleSelectPhoto))
@@ -281,8 +287,10 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
                 print("Failed to save user settings:", err)
                 return
             }
-            
             print("Finished saving user info")
+            self.dismiss(animated: true) {
+                self.delegate?.didSaveSettings()
+            }
         }
     }
     
