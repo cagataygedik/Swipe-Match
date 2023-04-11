@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegisterButton: UIButton {
+class CustomButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,9 +18,13 @@ class RegisterButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    convenience init(title: String) {
+        self.init(frame: .zero)
+        self.setTitle(title, for: .normal)
+    }
+    
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        setTitle(Title.register, for: .normal)
         setTitleColor(.white, for: .normal)
         titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         isEnabled = false
