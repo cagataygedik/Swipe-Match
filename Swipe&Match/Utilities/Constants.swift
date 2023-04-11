@@ -43,6 +43,9 @@ enum Color {
 enum Title {
     static let photo = "Select a photo"
     static let register = "Register"
+    static let goToLogin = "Go to Login"
+    static let login = "Login"
+    static let goToRegister = "Go to Register"
 }
 
 enum NavigationItemText {
