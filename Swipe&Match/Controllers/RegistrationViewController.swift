@@ -9,19 +9,23 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
+
 class RegistrationViewController: UIViewController {
     
     let selectPhotoButton = RegisterSelectPhotoButton(frame: .zero)
     let fullNameTextField = CustomTextField(placeholder: Placeholder.fullName, keyboardType: .emailAddress)
     let emailTextField = CustomTextField(placeholder: Placeholder.email, keyboardType: .emailAddress)
     let passwordTextField = CustomTextField(placeholder: Placeholder.password, keyboardType: .default)
-    let registerButton = RegisterButton(type: .system)
+    let registerButton = CustomButton(title: Title.register)
     let registeringHUD = JGProgressHUD(style: .light)
+    let goToLoginButton = GoToButton(title: Title.goToLogin)
+    
+    var delegate: LoginViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGradientLayer()
-        configureView()
+        configureStackView()
         setupNotificationObservers()
         handleTapGesture()
         configureSelectPhotoButton()
@@ -29,6 +33,7 @@ class RegistrationViewController: UIViewController {
         configureEmailTextField()
         configurePasswordTextField()
         configureRegisterButton()
+        configureGoToLoginButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -174,13 +179,25 @@ class RegistrationViewController: UIViewController {
         view.endEditing(true)
     }
     
-    private func configureView() {
+    private func configureStackView() {
         let stackView = UIStackView(arrangedSubviews: [selectPhotoButton, fullNameTextField, emailTextField, passwordTextField, registerButton])
         view.addSubview(stackView)
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    private func configureGoToLoginButton() {
+        view.addSubview(goToLoginButton)
+        goToLoginButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
+        goToLoginButton.addTarget(self, action: #selector(handleGoToLogin), for: .touchUpInside)
+    }
+    
+    @objc private func handleGoToLogin() {
+        let loginViewController = LoginViewController()
+        loginViewController.delegate = delegate
+        navigationController?.pushViewController(loginViewController, animated: true)
     }
     
     private func setupGradientLayer() {

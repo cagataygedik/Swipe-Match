@@ -262,8 +262,13 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NavigationItemText.cancel, style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(title: NavigationItemText.save, style: .plain, target: self, action: #selector(handleSave)),
-            UIBarButtonItem(title: NavigationItemText.logout, style: .plain, target: self, action: #selector(handleCancel))
+            UIBarButtonItem(title: NavigationItemText.logout, style: .plain, target: self, action: #selector(handleLogout))
         ]
+    }
+    
+    @objc private func handleLogout() {
+        try? Auth.auth().signOut()
+        dismiss(animated: true)
     }
     
     @objc private func handleSave() {

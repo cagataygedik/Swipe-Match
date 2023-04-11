@@ -9,7 +9,8 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class HomeViewController: UIViewController, SettingsTableViewControllerDelegate {
+class HomeViewController: UIViewController, SettingsTableViewControllerDelegate, LoginViewControllerDelegate {
+    
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let bottomStackView = HomeBottomControlsStackView()
@@ -28,14 +29,34 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate 
         //configureBottomStackView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if Auth.auth().currentUser == nil {
+            let registrationViewController = RegistrationViewController()
+            registrationViewController.delegate = self
+            let navigationController = UINavigationController(rootViewController: registrationViewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true)
+        }
+    }
+    
+    func didFinishLoggingIn() {
+        fetchCurrentUser()
+    }
+    
     fileprivate var user: User?
     
     private func fetchCurrentUser() {
+        hud.textLabel.text = "Loading"
+        hud.show(in: view)
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
             if let err = err {
                 print(err)
+                self.hud.dismiss()
+                return
             }
+            self.hud.dismiss()
             guard let dictionary = snapshot?.data() else { return }
             self.user = User(dictionary: dictionary)
             self.fetchUsersFromFirestore()
