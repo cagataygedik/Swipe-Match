@@ -85,9 +85,9 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
-//                self.cardViewModels.append(user.toCardViewModel())
-//                self.lastFetchedUser = user
-                self.setupCardFromUser(user: user)
+                if user.uid != Auth.auth().currentUser?.uid {
+                    self.setupCardFromUser(user: user)
+                }
             })
         }
     }
