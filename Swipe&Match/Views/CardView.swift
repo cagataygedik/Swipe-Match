@@ -34,6 +34,7 @@ class CardView: UIView {
     let informationLabel = UILabel()
     let gradientLayer = CAGradientLayer()
     let barsStackView = UIStackView()
+    let moreInfoButton = UIButton(type: .system)
     
     fileprivate let threshold: CGFloat = 80
     
@@ -44,6 +45,7 @@ class CardView: UIView {
         setupGradientLayer()
         configureInformationLabel()
         handleGestures()
+        configureMoreInfoButton()
     }
     
     private func setupImageIndexObserver() {
@@ -88,6 +90,7 @@ class CardView: UIView {
     
     private func configureImageView() {
         addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.fillSuperview()
         imageView.contentMode = .scaleAspectFill
         layer.cornerRadius = 15
@@ -96,9 +99,22 @@ class CardView: UIView {
     
     private func configureInformationLabel() {
         addSubview(informationLabel)
+        informationLabel.translatesAutoresizingMaskIntoConstraints = false
         informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
         informationLabel.textColor = .white
         informationLabel.numberOfLines = 0
+    }
+    
+    private func configureMoreInfoButton() {
+        addSubview(moreInfoButton)
+        moreInfoButton.translatesAutoresizingMaskIntoConstraints = false
+        moreInfoButton.setImage(Images.info, for: .normal)
+        moreInfoButton.addTarget(self, action: #selector(handleMoreInfo), for: .touchUpInside)
+        moreInfoButton.anchor(top: nil, leading: nil, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 16, right: 16), size: .init(width: 44, height: 44))
+    }
+    
+    @objc private func handleMoreInfo() {
+        
     }
     
     @objc fileprivate func handleTapGesture(gesture: UITapGestureRecognizer) {
