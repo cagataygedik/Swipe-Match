@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 protocol CardViewDelegate {
-    func didTapMoreInfo()
+    func didTapMoreInfo(cardViewModel: CardViewModel)
 }
 
 class CardView: UIView {
@@ -114,13 +114,13 @@ class CardView: UIView {
     private func configureMoreInfoButton() {
         addSubview(moreInfoButton)
         moreInfoButton.translatesAutoresizingMaskIntoConstraints = false
-        moreInfoButton.setImage(Images.info, for: .normal)
+        moreInfoButton.setImage(Buttons.info, for: .normal)
         moreInfoButton.addTarget(self, action: #selector(handleMoreInfo), for: .touchUpInside)
         moreInfoButton.anchor(top: nil, leading: nil, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 16, right: 16), size: .init(width: 44, height: 44))
     }
     
     @objc private func handleMoreInfo() {
-        delegate?.didTapMoreInfo()
+        delegate?.didTapMoreInfo(cardViewModel: self.cardViewModel)
     }
     
     @objc fileprivate func handleTapGesture(gesture: UITapGestureRecognizer) {

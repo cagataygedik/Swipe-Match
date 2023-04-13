@@ -8,17 +8,14 @@
 import Foundation
 import UIKit
 
-enum TopImages {
+enum Buttons {
     static let profile = UIImage(named: "top_left_profile")?.withRenderingMode(.alwaysOriginal)
     static let fire = UIImage(named: "app_icon")?.withRenderingMode(.alwaysOriginal)
     static let chat = UIImage(named: "top_right_messages")?.withRenderingMode(.alwaysOriginal)
-}
 
-enum Images {
     static let info = UIImage(named: "info_icon")?.withRenderingMode(.alwaysOriginal)
-}
+    static let dismissDown = UIImage(named: "dismiss_down_arrow")?.withRenderingMode(.alwaysOriginal)
 
-enum BottomImages {
     static let refresh = UIImage(named: "refresh_circle")?.withRenderingMode(.alwaysOriginal)
     static let dismiss = UIImage(named: "dismiss_circle")?.withRenderingMode(.alwaysOriginal)
     static let superLike = UIImage(named: "super_like_circle")?.withRenderingMode(.alwaysOriginal)

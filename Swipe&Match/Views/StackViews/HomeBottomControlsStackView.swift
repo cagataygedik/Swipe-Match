@@ -9,11 +9,11 @@ import UIKit
 
 class HomeBottomControlsStackView: UIStackView {
     
-    let refreshButton = createButton(image: BottomImages.refresh!)
-    let dismissButton = createButton(image: BottomImages.dismiss!)
-    let superLikeButton = createButton(image: BottomImages.superLike!)
-    let likeButton = createButton(image: BottomImages.like!)
-    let boostButton = createButton(image: BottomImages.boost!)
+    let refreshButton = createButton(image: Buttons.refresh!)
+    let dismissButton = createButton(image: Buttons.dismiss!)
+    let superLikeButton = createButton(image: Buttons.superLike!)
+    let likeButton = createButton(image: Buttons.like!)
+    let boostButton = createButton(image: Buttons.boost!)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
