@@ -8,7 +8,13 @@
 import UIKit
 import SDWebImage
 
+protocol CardViewDelegate {
+    func didTapMoreInfo()
+}
+
 class CardView: UIView {
+    
+    var delegate: CardViewDelegate?
     
     var cardViewModel: CardViewModel! {
         didSet {
@@ -114,7 +120,7 @@ class CardView: UIView {
     }
     
     @objc private func handleMoreInfo() {
-        
+        delegate?.didTapMoreInfo()
     }
     
     @objc fileprivate func handleTapGesture(gesture: UITapGestureRecognizer) {

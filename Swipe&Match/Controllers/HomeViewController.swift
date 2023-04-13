@@ -9,8 +9,8 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class HomeViewController: UIViewController, SettingsTableViewControllerDelegate, LoginViewControllerDelegate {
-    
+class HomeViewController: UIViewController, SettingsTableViewControllerDelegate, LoginViewControllerDelegate, CardViewDelegate {
+
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let bottomStackView = HomeBottomControlsStackView()
@@ -25,8 +25,6 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
         setupFirestoreUserCards()
         configureTopStackView()
         fetchCurrentUser()
-        //fetchUsersFromFirestore()
-        //configureBottomStackView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,8 +85,8 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
-                self.cardViewModels.append(user.toCardViewModel())
-                self.lastFetchedUser = user
+//                self.cardViewModels.append(user.toCardViewModel())
+//                self.lastFetchedUser = user
                 self.setupCardFromUser(user: user)
             })
         }
@@ -96,9 +94,17 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
     
     private func setupCardFromUser(user: User) {
         let cardView = CardView(frame: .zero)
+        cardView.delegate = self
         cardView.cardViewModel = user.toCardViewModel()
         cardsDeckView.addSubview(cardView)
+        cardsDeckView.sendSubviewToBack(cardView)
         cardView.fillSuperview()
+    }
+    
+    func didTapMoreInfo() {
+        let userDetailsViewController = UserDetailsViewController()
+        userDetailsViewController.modalPresentationStyle = .fullScreen
+        present(userDetailsViewController, animated: true)
     }
     
     private func configureTopStackView() {
