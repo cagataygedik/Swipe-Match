@@ -14,6 +14,10 @@ enum TopImages {
     static let chat = UIImage(named: "top_right_messages")
 }
 
+enum Images {
+    static let info = UIImage(named: "info_icon")
+}
+
 enum BottomImages {
     static let refresh = UIImage(named: "refresh_circle")
     static let dismiss = UIImage(named: "dismiss_circle")
