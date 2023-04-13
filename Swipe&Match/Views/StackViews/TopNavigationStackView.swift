@@ -30,18 +30,18 @@ class TopNavigationStackView: UIStackView {
     
     private func configureProfileButton() {
         addArrangedSubview(profileButton)
-        profileButton.setImage(TopImages.profile?.withRenderingMode(.alwaysOriginal), for: .normal)
+        profileButton.setImage(TopImages.profile, for: .normal)
     }
     
     private func configureFireButtom() {
         addArrangedSubview(fireButton)
-        fireButton.setImage(TopImages.fire?.withRenderingMode(.alwaysOriginal), for: .normal)
+        fireButton.setImage(TopImages.fire, for: .normal)
         fireButton.contentMode = .scaleAspectFit
     }
     
     private func configureChatButton() {
         addArrangedSubview(chatButton)
-        chatButton.setImage(TopImages.chat?.withRenderingMode(.alwaysOriginal), for: .normal)
+        chatButton.setImage(TopImages.chat, for: .normal)
     }
     
     required init(coder: NSCoder) {
