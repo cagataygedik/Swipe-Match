@@ -9,21 +9,21 @@ import Foundation
 import UIKit
 
 enum TopImages {
-    static let profile = UIImage(named: "top_left_profile")
-    static let fire = UIImage(named: "app_icon")
-    static let chat = UIImage(named: "top_right_messages")
+    static let profile = UIImage(named: "top_left_profile")?.withRenderingMode(.alwaysOriginal)
+    static let fire = UIImage(named: "app_icon")?.withRenderingMode(.alwaysOriginal)
+    static let chat = UIImage(named: "top_right_messages")?.withRenderingMode(.alwaysOriginal)
 }
 
 enum Images {
-    static let info = UIImage(named: "info_icon")
+    static let info = UIImage(named: "info_icon")?.withRenderingMode(.alwaysOriginal)
 }
 
 enum BottomImages {
-    static let refresh = UIImage(named: "refresh_circle")
-    static let dismiss = UIImage(named: "dismiss_circle")
-    static let superLike = UIImage(named: "super_like_circle")
-    static let like = UIImage(named: "like_circle")
-    static let boost = UIImage(named: "boost_circle")
+    static let refresh = UIImage(named: "refresh_circle")?.withRenderingMode(.alwaysOriginal)
+    static let dismiss = UIImage(named: "dismiss_circle")?.withRenderingMode(.alwaysOriginal)
+    static let superLike = UIImage(named: "super_like_circle")?.withRenderingMode(.alwaysOriginal)
+    static let like = UIImage(named: "like_circle")?.withRenderingMode(.alwaysOriginal)
+    static let boost = UIImage(named: "boost_circle")?.withRenderingMode(.alwaysOriginal)
 }
 
 enum Placeholder {
