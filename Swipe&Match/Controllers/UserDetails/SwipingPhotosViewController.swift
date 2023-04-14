@@ -9,22 +9,24 @@ import UIKit
 
 class SwipingPhotosViewController: UIPageViewController, UIPageViewControllerDataSource {
     
-    let controllers = [
-        PhotoController(image: #imageLiteral(resourceName: "app_icon")),
-        PhotoController(image: #imageLiteral(resourceName: "like_circle")),
-        PhotoController(image: #imageLiteral(resourceName: "boost_circle")),
-        PhotoController(image: #imageLiteral(resourceName: "super_like_circle")),
-        PhotoController(image: #imageLiteral(resourceName: "dismiss_down_arrow"))
-    ]
+    var cardViewModel: CardViewModel! {
+        didSet {
+            //cardViewModel.imageUrls
+            controllers = cardViewModel.imageUrls.map({ (imageNames) -> UIViewController in
+                let photoController = PhotoController(imageUrl: imageNames)
+                return photoController
+            })
+            setViewControllers([controllers.first!], direction: .forward, animated: false)
+        }
+    }
+    
+    var controllers = [UIViewController]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         dataSource = self
         view.backgroundColor = .white
-    
-        setViewControllers([controllers.first!], direction: .forward, animated: false)
-        
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -43,8 +45,10 @@ class SwipingPhotosViewController: UIPageViewController, UIPageViewControllerDat
 class PhotoController: UIViewController {
     let imageView = UIImageView(image: #imageLiteral(resourceName: "kelly3"))
     
-    init(image: UIImage) {
-        imageView.image = image
+    init(imageUrl: String) {
+        if let url = URL(string: imageUrl) {
+            imageView.sd_setImage(with: url)
+        }
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -53,7 +57,7 @@ class PhotoController: UIViewController {
         
         view.addSubview(imageView)
         imageView.fillSuperview()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
     }
     
     required init?(coder: NSCoder) {
