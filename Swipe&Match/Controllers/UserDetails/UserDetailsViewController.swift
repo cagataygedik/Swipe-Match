@@ -14,11 +14,6 @@ class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
         didSet {
             infoLabel.attributedText = cardViewModel.attributedString
             swipingPhotosViewController.cardViewModel = cardViewModel
-            
-            /*
-            guard let firstImageUrl = cardViewModel.imageNames.first, let url = URL(string: firstImageUrl) else { return }
-            imageView.sd_setImage(with: url)
-             */
         }
     }
     
@@ -29,15 +24,6 @@ class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
         return scrollView
     }()
-    
-    /*
-    let imageView: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "kelly3"))
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-     */
     
     let swipingPhotosViewController = SwipingPhotosViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
