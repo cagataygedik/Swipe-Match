@@ -27,6 +27,7 @@
 		A28E56A629D2D5AC00475BA3 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28E56A529D2D5AC00475BA3 /* CardViewModel.swift */; };
 		A29193A329E83A03006664CF /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193A229E83A03006664CF /* UserDetailsViewController.swift */; };
 		A2982CCD29DAE68800352ED1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2982CCC29DAE68800352ED1 /* GoogleService-Info.plist */; };
+		A2A44C2529E950E6004E0F83 /* SwipingPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A44C2429E950E6004E0F83 /* SwipingPhotosViewController.swift */; };
 		A2CC8FE429D71D0800A62E03 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CC8FE329D71D0800A62E03 /* RegistrationViewController.swift */; };
 		A2CC8FE629D7246B00A62E03 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CC8FE529D7246B00A62E03 /* CustomTextField.swift */; };
 		A2D46EAD29E54041001631BB /* GoToButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D46EAC29E54041001631BB /* GoToButton.swift */; };
@@ -60,6 +61,7 @@
 		A28E56A529D2D5AC00475BA3 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		A29193A229E83A03006664CF /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		A2982CCC29DAE68800352ED1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A2A44C2429E950E6004E0F83 /* SwipingPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosViewController.swift; sourceTree = "<group>"; };
 		A2CC8FE329D71D0800A62E03 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		A2CC8FE529D7246B00A62E03 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		A2D46EAC29E54041001631BB /* GoToButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoToButton.swift; sourceTree = "<group>"; };
@@ -210,11 +212,11 @@
 		A28E56A329D2D46C00475BA3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A2A44C2329E9509B004E0F83 /* UserDetails */,
 				A2582A8729CCD29A00DFA823 /* HomeViewController.swift */,
 				A2CC8FE329D71D0800A62E03 /* RegistrationViewController.swift */,
 				A26ACEB829E00FFB0056DF45 /* SettingsTableViewController.swift */,
 				A2D46EB229E5453F001631BB /* LoginViewController.swift */,
-				A29193A229E83A03006664CF /* UserDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -227,6 +229,15 @@
 				A2D46EB029E5430F001631BB /* Bindable.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A2A44C2329E9509B004E0F83 /* UserDetails */ = {
+			isa = PBXGroup;
+			children = (
+				A29193A229E83A03006664CF /* UserDetailsViewController.swift */,
+				A2A44C2429E950E6004E0F83 /* SwipingPhotosViewController.swift */,
+			);
+			path = UserDetails;
 			sourceTree = "<group>";
 		};
 		A2CC8FE729D7260A00A62E03 /* CustomViews */ = {
@@ -373,6 +384,7 @@
 				A2D46EB129E5430F001631BB /* Bindable.swift in Sources */,
 				A2D46EAF29E542ED001631BB /* LoginViewModel.swift in Sources */,
 				A2D46EB329E5453F001631BB /* LoginViewController.swift in Sources */,
+				A2A44C2529E950E6004E0F83 /* SwipingPhotosViewController.swift in Sources */,
 				A2CC8FE429D71D0800A62E03 /* RegistrationViewController.swift in Sources */,
 				A29193A329E83A03006664CF /* UserDetailsViewController.swift in Sources */,
 				A20B975429D1EBA400D6F27B /* User.swift in Sources */,
