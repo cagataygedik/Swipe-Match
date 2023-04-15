@@ -106,7 +106,6 @@ class CardView: UIView {
     private func configureSwipingView() {
         let swipingPhotosView = swipingPhotosController.view!
         addSubview(swipingPhotosView)
-        swipingPhotosView.translatesAutoresizingMaskIntoConstraints = false
         swipingPhotosView.fillSuperview()
         //swipingPhotosView.contentMode = .scaleAspectFill
         layer.cornerRadius = 15
