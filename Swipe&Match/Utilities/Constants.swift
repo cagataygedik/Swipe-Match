@@ -32,6 +32,7 @@ enum Placeholder {
     static let bio = "Enter your bio"
     static let profession = "Enter your profession"
     static let selectPhoto = "Select a photo"
+    static let image = UIImage(named: "photo_placeholder")?.withRenderingMode(.alwaysOriginal)
 }
 
 enum Color {
