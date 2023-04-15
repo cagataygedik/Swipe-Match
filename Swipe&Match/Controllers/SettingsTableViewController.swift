@@ -186,11 +186,13 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 5 {
+            let minAge = user?.minSeekingAge ?? 18
+            let maxAge = user?.maxSeekingAge ?? 50
             let sliderCell = SliderTableViewCell(style: .default, reuseIdentifier: nil)
             sliderCell.minSlider.addTarget(self, action: #selector(handleMinAgeChange), for: .valueChanged)
             sliderCell.maxSlider.addTarget(self, action: #selector(handleMaxAgeChange), for: .valueChanged)
-            sliderCell.minLabel.text = "Min: \(user?.minSeekingAge ?? -1)"
-            sliderCell.maxLabel.text = "Max: \(user?.maxSeekingAge ?? -1)"
+            sliderCell.minLabel.text = "Min: \(minAge)"
+            sliderCell.maxLabel.text = "Max: \(maxAge)"
             return sliderCell
         }
         let cell = SettingsTableViewCell(style: .default, reuseIdentifier: nil)
@@ -213,7 +215,6 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
         default:
             cell.textField.placeholder = Placeholder.bio
         }
-        
         return cell
     }
     
