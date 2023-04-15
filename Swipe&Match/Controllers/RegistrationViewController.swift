@@ -121,7 +121,7 @@ class RegistrationViewController: UIViewController {
     private func saveInfoToFirebase(imageUrl: String) {
         let uid = Auth.auth().currentUser?.uid ?? ""
         let fullName = fullNameTextField.text
-        let docData = ["fullname": fullName ?? "", "uid": uid, "imageUrl1": imageUrl]
+        let docData = ["fullname": fullName ?? "", "uid": uid, "imageUrl1": imageUrl,"age": 18, "minSeekingAge": 18, "maxSeekingAge": 50] as [String : Any]
         Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
             if let err = err {
                 self.showHUDWithError(error: err)
@@ -141,7 +141,7 @@ class RegistrationViewController: UIViewController {
     }
     
     @objc private func handleTextChange() {
-        guard let fullName = fullNameTextField.text, !fullName.isEmpty, let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text, !password.isEmpty else {
+        guard let fullName = fullNameTextField.text, !fullName.isEmpty, let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text, !password.isEmpty, let selectedImage = selectPhotoButton.imageView?.image, !selectedImage.size.equalTo(CGSize.zero) else {
             registerButton.isEnabled = false
             registerButton.backgroundColor = .lightGray
             return
@@ -216,6 +216,7 @@ extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
         self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        handleTextChange()
         dismiss(animated: true, completion: nil)
     }
     
