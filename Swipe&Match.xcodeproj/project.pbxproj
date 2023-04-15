@@ -34,6 +34,7 @@
 		A2D46EAF29E542ED001631BB /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D46EAE29E542ED001631BB /* LoginViewModel.swift */; };
 		A2D46EB129E5430F001631BB /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D46EB029E5430F001631BB /* Bindable.swift */; };
 		A2D46EB329E5453F001631BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D46EB229E5453F001631BB /* LoginViewController.swift */; };
+		A2EAEE8829EAD46000A67015 /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EAEE8729EAD46000A67015 /* PhotoController.swift */; };
 		A2ED1A8B29D31736008B244E /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED1A8A29D31736008B244E /* Advertiser.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		A2D46EAE29E542ED001631BB /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A2D46EB029E5430F001631BB /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		A2D46EB229E5453F001631BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A2EAEE8729EAD46000A67015 /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		A2ED1A8A29D31736008B244E /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		BFECDFFFFB5433385F95D4B2 /* Pods-Swipe&Match.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swipe&Match.release.xcconfig"; path = "Target Support Files/Pods-Swipe&Match/Pods-Swipe&Match.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -236,6 +238,7 @@
 			children = (
 				A29193A229E83A03006664CF /* UserDetailsViewController.swift */,
 				A2A44C2429E950E6004E0F83 /* SwipingPhotosViewController.swift */,
+				A2EAEE8729EAD46000A67015 /* PhotoController.swift */,
 			);
 			path = UserDetails;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				A2582A8429CCD29A00DFA823 /* AppDelegate.swift in Sources */,
 				A28CBF7A29CCE0AD00E5E505 /* HomeBottomControlsStackView.swift in Sources */,
 				A262C88129E42C1D00AA077E /* SliderTableViewCell.swift in Sources */,
+				A2EAEE8829EAD46000A67015 /* PhotoController.swift in Sources */,
 				A28CBF7C29CCEB6E00E5E505 /* TopNavigationStackView.swift in Sources */,
 				A28E56A629D2D5AC00475BA3 /* CardViewModel.swift in Sources */,
 				A21EE9F829CCF6080020A3AF /* Constants.swift in Sources */,

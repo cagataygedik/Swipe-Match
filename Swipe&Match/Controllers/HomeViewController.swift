@@ -145,4 +145,3 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
         }
     }
 }
-

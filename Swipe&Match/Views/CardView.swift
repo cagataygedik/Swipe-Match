@@ -19,10 +19,12 @@ class CardView: UIView {
     var cardViewModel: CardViewModel! {
         didSet {
             let imageName = cardViewModel.imageUrls.first ?? ""
+            /*
             if let url = URL(string: imageName) {
                 imageView.sd_setImage(with: url, placeholderImage: Placeholder.image, options: .continueInBackground)
             }
-            
+             */
+            swipingPhotosController.cardViewModel = self.cardViewModel
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
             
@@ -36,7 +38,8 @@ class CardView: UIView {
         }
     }
     
-    let imageView = UIImageView(image: UIImage(imageLiteralResourceName: "lady5c"))
+    //let imageView = UIImageView(image: UIImage(imageLiteralResourceName: "lady5c"))
+    let swipingPhotosController = SwipingPhotosViewController(isCardViewMode: true)
     let informationLabel = UILabel()
     let gradientLayer = CAGradientLayer()
     let barsStackView = UIStackView()
@@ -46,8 +49,8 @@ class CardView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureImageView()
-        setupBarsStackView()
+        configureSwipingView()
+        //setupBarsStackView()
         setupGradientLayer()
         configureInformationLabel()
         handleGestures()
@@ -56,9 +59,11 @@ class CardView: UIView {
     
     private func setupImageIndexObserver() {
         cardViewModel.imageIndexObserver = { [weak self] (index, imageUrl) in
+            /*
             if let url = URL(string: imageUrl ?? "") {
                 self?.imageView.sd_setImage(with: url, placeholderImage: Placeholder.image, options: .continueInBackground)
             }
+             */
             
             self?.barsStackView.arrangedSubviews.forEach { (view) in
                 //deselected color
@@ -72,9 +77,10 @@ class CardView: UIView {
     private func handleGestures() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
         addGestureRecognizer(panGesture)
-        
+        /*
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
         addGestureRecognizer(tapGesture)
+         */
     }
     
     private func setupBarsStackView() {
@@ -94,11 +100,12 @@ class CardView: UIView {
         gradientLayer.frame = self.frame
     }
     
-    private func configureImageView() {
-        addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.fillSuperview()
-        imageView.contentMode = .scaleAspectFill
+    private func configureSwipingView() {
+        let swipingPhotosView = swipingPhotosController.view!
+        addSubview(swipingPhotosView)
+        swipingPhotosView.translatesAutoresizingMaskIntoConstraints = false
+        swipingPhotosView.fillSuperview()
+        //swipingPhotosView.contentMode = .scaleAspectFill
         layer.cornerRadius = 15
         clipsToBounds = true
     }
@@ -122,7 +129,7 @@ class CardView: UIView {
     @objc private func handleMoreInfo() {
         delegate?.didTapMoreInfo(cardViewModel: self.cardViewModel)
     }
-    
+    /*
     @objc fileprivate func handleTapGesture(gesture: UITapGestureRecognizer) {
         let tapLocation = gesture.location(in: nil)
         let shouldAdvanceNextPhoto = tapLocation.x > frame.width / 2 ? true : false
@@ -132,6 +139,7 @@ class CardView: UIView {
             cardViewModel.goToPreviousPhoto()
         }
     }
+     */
     
     @objc fileprivate func handlePanGesture(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
