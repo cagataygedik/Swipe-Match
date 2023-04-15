@@ -65,6 +65,7 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
     private func configureBottomStackView() {
         bottomStackView.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
         bottomStackView.likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
+        bottomStackView.dismissButton.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
     }
     
     @objc private func handleRefresh() {
@@ -79,6 +80,7 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
         hud.show(in: view)
         
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
+        topCardView = nil
         query.getDocuments { (snapshot,err) in
             hud.dismiss()
             if let err = err {
@@ -106,16 +108,24 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
     var topCardView: CardView?
     
     @objc fileprivate func handleLike() {
+        performSwipeAnimation(translation: 700, angle: 15)
+    }
+    
+    @objc private func handleDismiss() {
+       performSwipeAnimation(translation: -700, angle: -15)
+    }
+    
+    private func performSwipeAnimation(translation: CGFloat, angle: CGFloat) {
         let duration = 0.5
         let translationAnimation = CABasicAnimation(keyPath: "position.x")
-        translationAnimation.toValue = 700
+        translationAnimation.toValue = translation
         translationAnimation.duration = duration
         translationAnimation.fillMode = .forwards
         translationAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         translationAnimation.isRemovedOnCompletion = false
         
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotationAnimation.toValue = 15 * CGFloat.pi / 180
+        rotationAnimation.toValue = angle * CGFloat.pi / 180
         rotationAnimation.duration = duration
         
         let cardView = topCardView
