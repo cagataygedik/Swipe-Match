@@ -10,7 +10,7 @@ import Firebase
 import JGProgressHUD
 
 class HomeViewController: UIViewController, SettingsTableViewControllerDelegate, LoginViewControllerDelegate, CardViewDelegate {
-
+    
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let bottomStackView = HomeBottomControlsStackView()
@@ -23,6 +23,7 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
         super.viewDidLoad()
         configureView()
         setupFirestoreUserCards()
+        configureBottomStackView()
         configureTopStackView()
         fetchCurrentUser()
     }
@@ -63,11 +64,13 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
     
     private func configureBottomStackView() {
         bottomStackView.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
+        bottomStackView.likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
     }
     
     @objc private func handleRefresh() {
         fetchUsersFromFirestore()
     }
+    
     
     private func fetchUsersFromFirestore() {
         guard let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge else { return }
@@ -82,23 +85,52 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
                 print("Failed", err)
                 return
             }
+            
+            var previousCardView: CardView?
+            
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
                 if user.uid != Auth.auth().currentUser?.uid {
-                    self.setupCardFromUser(user: user)
+                    let cardView = self.setupCardFromUser(user: user)
+                    previousCardView?.nextCardView = cardView
+                    previousCardView = cardView
+                    if self.topCardView == nil {
+                        self.topCardView = cardView
+                    }
                 }
             })
         }
     }
     
-    private func setupCardFromUser(user: User) {
+    var topCardView: CardView?
+    
+    @objc fileprivate func handleLike() {
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+            
+            self.topCardView?.frame = CGRect(x: 600, y: 0, width: self.topCardView!.frame.width, height: self.topCardView!.frame.height)
+            let angle = 15 * CGFloat.pi / 180
+            self.topCardView?.transform = CGAffineTransform(rotationAngle: angle)
+            
+        }) { (_) in
+            self.topCardView?.removeFromSuperview()
+            self.topCardView = self.topCardView?.nextCardView
+        }
+    }
+    
+    func didRemoveCard(cardView: CardView) {
+        self.topCardView?.removeFromSuperview()
+        self.topCardView = self.topCardView?.nextCardView
+    }
+    
+    private func setupCardFromUser(user: User) -> CardView {
         let cardView = CardView(frame: .zero)
         cardView.delegate = self
         cardView.cardViewModel = user.toCardViewModel()
         cardsDeckView.addSubview(cardView)
         cardsDeckView.sendSubviewToBack(cardView)
         cardView.fillSuperview()
+        return cardView
     }
     
     func didTapMoreInfo(cardViewModel: CardViewModel) {
