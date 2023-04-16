@@ -85,6 +85,7 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
     }
     
     @objc private func handleRefresh() {
+        cardsDeckView.subviews.forEach({$0.removeFromSuperview()})
         fetchUsersFromFirestore()
     }
     
@@ -110,7 +111,8 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
                 let isNotCurrentUser = user.uid != Auth.auth().currentUser?.uid
-                let hasNotSwipedBefore = self.swipes[user.uid!] == nil
+                //let hasNotSwipedBefore = self.swipes[user.uid!] == nil
+                let hasNotSwipedBefore = true
                 if isNotCurrentUser && hasNotSwipedBefore {
                     let cardView = self.setupCardFromUser(user: user)
                     previousCardView?.nextCardView = cardView
@@ -140,6 +142,7 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
         
         guard let cardUID = topCardView?.cardViewModel.uid else { return }
         
+        
         let documentData = [cardUID: didLike]
         
         Firestore.firestore().collection("swipes").document(uid).getDocument { (snapshot,err) in
@@ -154,7 +157,9 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
                         print("failed to save swipe data", err)
                     }
                     print("successfully updated")
-                    self.checkIfMatchExists(cardUID: cardUID)
+                    if didLike == 1 {
+                        self.checkIfMatchExists(cardUID: cardUID)
+                    }
                 }
             } else {
                 Firestore.firestore().collection("swipes").document(uid).setData(documentData) { (err) in
@@ -163,7 +168,9 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
                         return
                     }
                     print("successfully saved swipe")
-                    self.checkIfMatchExists(cardUID: cardUID)
+                    if didLike == 1 {
+                        self.checkIfMatchExists(cardUID: cardUID)
+                    }
                 }
             }
         }
@@ -182,13 +189,17 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
             
             let hasMatched = data[uid] as? Int == 1
             if hasMatched {
-                let hud = JGProgressHUD(style: .light)
-                hud.textLabel.text = "Found a match"
-                hud.show(in: self.view)
-                hud.dismiss(afterDelay: 4)
+                self.presentMatchView(cardUID: cardUID)
             }
         }
     }
+    
+    private func presentMatchView(cardUID: String) {
+        let matchView = MatchView()
+        view.addSubview(matchView)
+        matchView.fillSuperview()
+    }
+    
     
     private func performSwipeAnimation(translation: CGFloat, angle: CGFloat) {
         let duration = 0.5
