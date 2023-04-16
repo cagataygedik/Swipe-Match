@@ -40,6 +40,8 @@ enum Color {
     static let bottom = UIColor(red: 0.8980392157, green: 0.0, blue: 0.4470588235, alpha: 1.0)
     static let button = UIColor(red: 0.8235294118, green: 0.0, blue: 0.3254901961, alpha: 1.0)
     static let tableView = UIColor(white: 0.95, alpha: 1)
+    static let left = UIColor(red: 1.0, green: 0.01176470588, blue: 0.4470588235, alpha: 1.0)
+    static let right = UIColor(red: 1.0, green: 0.3921568627, blue: 0.3176470588, alpha: 1.0)
 }
 
 enum Title {
