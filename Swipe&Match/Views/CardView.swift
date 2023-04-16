@@ -175,6 +175,20 @@ class CardView: UIView {
         let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
         let shouldDismissCard = abs(gesture.translation(in: nil).x) > threshold
         
+        if shouldDismissCard {
+            guard let homeViewController = self.delegate as? HomeViewController else { return }
+            
+            if translationDirection == 1 {
+                homeViewController.handleLike()
+            } else {
+                homeViewController.handleDismiss()
+            }
+        } else {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut) {
+                self.transform = .identity
+            }
+        }
+        /*
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
             if shouldDismissCard {
                 self.frame = CGRect(x: 600 * translationDirection, y: 0, width: self.frame.width, height: self.frame.height)
@@ -189,6 +203,7 @@ class CardView: UIView {
                 self.delegate?.didRemoveCard(cardView: self)
             }
         }
+         */
     }
     
     required init?(coder: NSCoder) {
