@@ -136,6 +136,7 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
                         print("failed to save swipe data", err)
                     }
                     print("successfully updated")
+                    self.checkIfMatchExists(cardUID: cardUID)
                 }
             } else {
                 Firestore.firestore().collection("swipes").document(uid).setData(documentData) { (err) in
@@ -144,7 +145,29 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
                         return
                     }
                     print("successfully saved swipe")
+                    self.checkIfMatchExists(cardUID: cardUID)
                 }
+            }
+        }
+    }
+    
+    private func checkIfMatchExists(cardUID: String) {
+        Firestore.firestore().collection("swipes").document(cardUID).getDocument { (snapshot, err) in
+            if let err = err {
+                print("failed to fetch data", err)
+                return
+            }
+            guard let data = snapshot?.data() else { return }
+            print(data)
+            
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+            
+            let hasMatched = data[uid] as? Int == 1
+            if hasMatched {
+                let hud = JGProgressHUD(style: .light)
+                hud.textLabel.text = "Found a match"
+                hud.show(in: self.view)
+                hud.dismiss(afterDelay: 4)
             }
         }
     }
