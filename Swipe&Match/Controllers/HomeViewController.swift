@@ -58,7 +58,8 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
             self.hud.dismiss()
             guard let dictionary = snapshot?.data() else { return }
             self.user = User(dictionary: dictionary)
-            self.fetchUsersFromFirestore()
+            self.fetchSwipes()
+            //self.fetchUsersFromFirestore()
         }
     }
     
@@ -66,6 +67,21 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
         bottomStackView.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
         bottomStackView.likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
         bottomStackView.dismissButton.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
+    }
+    
+    var swipes = [String: Int]()
+    
+    private func fetchSwipes() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("swipes").document(uid).getDocument { (snapshot,err) in
+            if let err = err {
+                print("Failed to fetch swipes", err)
+            }
+            print("swipes", snapshot?.data() ?? "")
+            guard let data = snapshot?.data() as? [String: Int] else { return }
+            self.swipes = data
+            self.fetchUsersFromFirestore()
+        }
     }
     
     @objc private func handleRefresh() {
@@ -93,7 +109,9 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
-                if user.uid != Auth.auth().currentUser?.uid {
+                let isNotCurrentUser = user.uid != Auth.auth().currentUser?.uid
+                let hasNotSwipedBefore = self.swipes[user.uid!] == nil
+                if isNotCurrentUser && hasNotSwipedBefore {
                     let cardView = self.setupCardFromUser(user: user)
                     previousCardView?.nextCardView = cardView
                     previousCardView = cardView
