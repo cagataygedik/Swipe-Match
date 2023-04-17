@@ -51,14 +51,6 @@ class MatchesMessagesController: LBTAListController<MatchCell, Match>, UICollect
         super.viewDidLoad()
         configureCollectionView()
         configureCustomNavBar()
-        
-        /*
-        items = [
-            .init(name: "test", profileImageUrl: "https://firebasestorage.googleapis.com:443/v0/b/swipematch-ee0e6.appspot.com/o/images%2F87DFD8D5-2D03-4AB2-9932-6B5C9EA7F541?alt=media&token=b4045c7a-35c8-49a7-a797-dbd1c94837f0"),
-            .init(name: "2", profileImageUrl: "https://firebasestorage.googleapis.com:443/v0/b/swipematch-ee0e6.appspot.com/o/images%2F0B683EEE-A4ED-4FEC-9D41-013980A16FC5?alt=media&token=759c4ab3-1215-4c24-8492-c0c6093c931c"),
-            .init(name: "3", profileImageUrl: "profile url"),
-        ]
-         */
         fetchMatches()
     }
     
@@ -69,7 +61,6 @@ class MatchesMessagesController: LBTAListController<MatchCell, Match>, UICollect
                 print("failed to fetch", err)
                 return
             }
-            print("here are my matches documents")
             
             var matches = [Match]()
             

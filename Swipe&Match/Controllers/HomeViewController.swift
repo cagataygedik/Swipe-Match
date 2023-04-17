@@ -59,7 +59,6 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
             guard let dictionary = snapshot?.data() else { return }
             self.user = User(dictionary: dictionary)
             self.fetchSwipes()
-            //self.fetchUsersFromFirestore()
         }
     }
     

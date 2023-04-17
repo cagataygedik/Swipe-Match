@@ -157,7 +157,6 @@
 				A21EE9F629CCF5FB0020A3AF /* Utilities */,
 				A21EE9F529CCF5E80020A3AF /* Support */,
 				A28CBF7829CCE07600E5E505 /* Views */,
-				A28CBF7529CCD70F00E5E505 /* Extensions */,
 				A2582A9129CCD29B00DFA823 /* Info.plist */,
 				A2982CCC29DAE68800352ED1 /* GoogleService-Info.plist */,
 			);
@@ -200,13 +199,6 @@
 				A2B2E5E929EC20980012B2E9 /* KeepSwipingButton.swift */,
 			);
 			path = Buttons;
-			sourceTree = "<group>";
-		};
-		A28CBF7529CCD70F00E5E505 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A28CBF7829CCE07600E5E505 /* Views */ = {
