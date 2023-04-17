@@ -256,7 +256,7 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
     }
     
     @objc private func handleChat() {
-        let vc = MatchesMessagesController(collectionViewLayout: UICollectionViewFlowLayout())
+        let vc = MatchesMessagesController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
