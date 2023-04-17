@@ -21,7 +21,6 @@
 		A26ACEC129E02D220056DF45 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26ACEC029E02D220056DF45 /* SettingsTableViewCell.swift */; };
 		A28505BF29DAEDAF007E4E6A /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28505BE29DAEDAF007E4E6A /* CustomButton.swift */; };
 		A28505C129DAEFBC007E4E6A /* RegisterSelectPhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28505C029DAEFBC007E4E6A /* RegisterSelectPhotoButton.swift */; };
-		A28CBF7729CCD7A500E5E505 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CBF7629CCD7A500E5E505 /* Extensions+UIView.swift */; };
 		A28CBF7A29CCE0AD00E5E505 /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CBF7929CCE0AD00E5E505 /* HomeBottomControlsStackView.swift */; };
 		A28CBF7C29CCEB6E00E5E505 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28CBF7B29CCEB6E00E5E505 /* TopNavigationStackView.swift */; };
 		A28E56A629D2D5AC00475BA3 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28E56A529D2D5AC00475BA3 /* CardViewModel.swift */; };
@@ -39,6 +38,7 @@
 		A2D46EB329E5453F001631BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D46EB229E5453F001631BB /* LoginViewController.swift */; };
 		A2EAEE8829EAD46000A67015 /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EAEE8729EAD46000A67015 /* PhotoController.swift */; };
 		A2ED1A8B29D31736008B244E /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED1A8A29D31736008B244E /* Advertiser.swift */; };
+		A2FCAA0929ED1E3000B81FAE /* MatchesMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCAA0829ED1E3000B81FAE /* MatchesMessagesController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +59,6 @@
 		A26ACEC029E02D220056DF45 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		A28505BE29DAEDAF007E4E6A /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		A28505C029DAEFBC007E4E6A /* RegisterSelectPhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSelectPhotoButton.swift; sourceTree = "<group>"; };
-		A28CBF7629CCD7A500E5E505 /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 		A28CBF7929CCE0AD00E5E505 /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
 		A28CBF7B29CCEB6E00E5E505 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 		A28E56A529D2D5AC00475BA3 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
@@ -77,6 +76,7 @@
 		A2D46EB229E5453F001631BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A2EAEE8729EAD46000A67015 /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		A2ED1A8A29D31736008B244E /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		A2FCAA0829ED1E3000B81FAE /* MatchesMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesMessagesController.swift; sourceTree = "<group>"; };
 		BFECDFFFFB5433385F95D4B2 /* Pods-Swipe&Match.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swipe&Match.release.xcconfig"; path = "Target Support Files/Pods-Swipe&Match/Pods-Swipe&Match.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,7 +203,6 @@
 		A28CBF7529CCD70F00E5E505 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A28CBF7629CCD7A500E5E505 /* Extensions+UIView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -223,6 +222,7 @@
 		A28E56A329D2D46C00475BA3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A2FCAA0729ED1E0E00B81FAE /* MatchesMessages */,
 				A2A44C2329E9509B004E0F83 /* UserDetails */,
 				A2582A8729CCD29A00DFA823 /* HomeViewController.swift */,
 				A2CC8FE329D71D0800A62E03 /* RegistrationViewController.swift */,
@@ -259,6 +259,14 @@
 				A28505BC29DAED8C007E4E6A /* TextFields */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		A2FCAA0729ED1E0E00B81FAE /* MatchesMessages */ = {
+			isa = PBXGroup;
+			children = (
+				A2FCAA0829ED1E3000B81FAE /* MatchesMessagesController.swift */,
+			);
+			path = MatchesMessages;
 			sourceTree = "<group>";
 		};
 		EEBEA34C1F875F7AA5A4F595 /* Pods */ = {
@@ -399,13 +407,13 @@
 				A2B2E5E629EC12F90012B2E9 /* MatchView.swift in Sources */,
 				A2B2E5EA29EC20980012B2E9 /* KeepSwipingButton.swift in Sources */,
 				A2D46EAF29E542ED001631BB /* LoginViewModel.swift in Sources */,
+				A2FCAA0929ED1E3000B81FAE /* MatchesMessagesController.swift in Sources */,
 				A2D46EB329E5453F001631BB /* LoginViewController.swift in Sources */,
 				A2A44C2529E950E6004E0F83 /* SwipingPhotosViewController.swift in Sources */,
 				A2CC8FE429D71D0800A62E03 /* RegistrationViewController.swift in Sources */,
 				A29193A329E83A03006664CF /* UserDetailsViewController.swift in Sources */,
 				A20B975429D1EBA400D6F27B /* User.swift in Sources */,
 				A28505C129DAEFBC007E4E6A /* RegisterSelectPhotoButton.swift in Sources */,
-				A28CBF7729CCD7A500E5E505 /* Extensions+UIView.swift in Sources */,
 				A26ACEC129E02D220056DF45 /* SettingsTableViewCell.swift in Sources */,
 				A2D46EAD29E54041001631BB /* GoToButton.swift in Sources */,
 				A28505BF29DAEDAF007E4E6A /* CustomButton.swift in Sources */,

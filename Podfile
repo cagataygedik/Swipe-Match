@@ -13,6 +13,7 @@ target 'Swipe&Match' do
   pod 'Firebase/Core’
   pod 'SDWebImage','~>5.15.5’
   pod 'JGProgressHUD','~>2.2'
+  pod 'LBTATools’
 
 post_install do |installer|
   installer.generated_projects.each do |project|
