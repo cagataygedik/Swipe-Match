@@ -39,6 +39,7 @@
 		A2EAEE8829EAD46000A67015 /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EAEE8729EAD46000A67015 /* PhotoController.swift */; };
 		A2ED1A8B29D31736008B244E /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED1A8A29D31736008B244E /* Advertiser.swift */; };
 		A2FCAA0929ED1E3000B81FAE /* MatchesMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCAA0829ED1E3000B81FAE /* MatchesMessagesController.swift */; };
+		A2FCAA0B29ED25C700B81FAE /* MatchesNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCAA0A29ED25C700B81FAE /* MatchesNavigationBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		A2EAEE8729EAD46000A67015 /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		A2ED1A8A29D31736008B244E /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		A2FCAA0829ED1E3000B81FAE /* MatchesMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesMessagesController.swift; sourceTree = "<group>"; };
+		A2FCAA0A29ED25C700B81FAE /* MatchesNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesNavigationBar.swift; sourceTree = "<group>"; };
 		BFECDFFFFB5433385F95D4B2 /* Pods-Swipe&Match.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swipe&Match.release.xcconfig"; path = "Target Support Files/Pods-Swipe&Match/Pods-Swipe&Match.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -265,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				A2FCAA0829ED1E3000B81FAE /* MatchesMessagesController.swift */,
+				A2FCAA0A29ED25C700B81FAE /* MatchesNavigationBar.swift */,
 			);
 			path = MatchesMessages;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				A2EAEE8829EAD46000A67015 /* PhotoController.swift in Sources */,
 				A28CBF7C29CCEB6E00E5E505 /* TopNavigationStackView.swift in Sources */,
 				A28E56A629D2D5AC00475BA3 /* CardViewModel.swift in Sources */,
+				A2FCAA0B29ED25C700B81FAE /* MatchesNavigationBar.swift in Sources */,
 				A21EE9F829CCF6080020A3AF /* Constants.swift in Sources */,
 				A2B2E5E829EC1DF30012B2E9 /* SendMessageButton.swift in Sources */,
 				A2D46EB129E5430F001631BB /* Bindable.swift in Sources */,
