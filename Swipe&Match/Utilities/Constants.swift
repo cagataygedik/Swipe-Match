@@ -12,6 +12,7 @@ enum Buttons {
     static let profile = UIImage(named: "top_left_profile")?.withRenderingMode(.alwaysOriginal)
     static let fire = UIImage(named: "app_icon")?.withRenderingMode(.alwaysOriginal)
     static let chat = UIImage(named: "top_right_messages")?.withRenderingMode(.alwaysOriginal)
+    static let messagesChatIcon = UIImage(named: "top_messages_icon")?.withRenderingMode(.alwaysTemplate)
 
     static let info = UIImage(named: "info_icon")?.withRenderingMode(.alwaysOriginal)
     static let dismissDown = UIImage(named: "dismiss_down_arrow")?.withRenderingMode(.alwaysOriginal)
@@ -42,6 +43,10 @@ enum Color {
     static let tableView = UIColor(white: 0.95, alpha: 1)
     static let left = UIColor(red: 1.0, green: 0.01176470588, blue: 0.4470588235, alpha: 1.0)
     static let right = UIColor(red: 1.0, green: 0.3921568627, blue: 0.3176470588, alpha: 1.0)
+    
+    enum messages {
+        static let navBarColor = UIColor(red: 0.9792197347, green: 0.2754820287, blue: 0.3579338193, alpha: 1)
+    }
 }
 
 enum Title {
