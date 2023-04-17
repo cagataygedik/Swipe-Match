@@ -252,6 +252,12 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
     
     private func configureTopStackView() {
         topStackView.profileButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+        topStackView.chatButton.addTarget(self, action: #selector(handleChat), for: .touchUpInside)
+    }
+    
+    @objc private func handleChat() {
+        let vc = MatchesMessagesController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func handleSettings() {
@@ -267,6 +273,7 @@ class HomeViewController: UIViewController, SettingsTableViewControllerDelegate,
     }
     
     fileprivate func configureView() {
+        navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .white
         let allStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, bottomStackView])
         view.addSubview(allStackView)
