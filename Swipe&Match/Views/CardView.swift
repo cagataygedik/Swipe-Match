@@ -36,7 +36,6 @@ class CardView: UIView {
         }
     }
     
-    //let imageView = UIImageView(image: UIImage(imageLiteralResourceName: "lady5c"))
     let swipingPhotosController = SwipingPhotosViewController(isCardViewMode: true)
     let informationLabel = UILabel()
     let gradientLayer = CAGradientLayer()
