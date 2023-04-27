@@ -13,7 +13,7 @@ enum Buttons {
     static let fire = UIImage(named: "app_icon")?.withRenderingMode(.alwaysOriginal)
     static let chat = UIImage(named: "top_right_messages")?.withRenderingMode(.alwaysOriginal)
     static let messagesChatIcon = UIImage(named: "top_messages_icon")?.withRenderingMode(.alwaysTemplate)
-
+    static let flag = UIImage(named: "flag")?.withRenderingMode(.alwaysOriginal)
     static let info = UIImage(named: "info_icon")?.withRenderingMode(.alwaysOriginal)
     static let dismissDown = UIImage(named: "dismiss_down_arrow")?.withRenderingMode(.alwaysOriginal)
 
